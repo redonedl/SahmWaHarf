@@ -15,7 +15,8 @@ import LinearGradient from 'react-native-linear-gradient';
 import { getLevel, getActualFileCount, DISPLAY_LEVEL_COUNT } from '../assets/levels/index';
 import { getCategoryById } from '../data/categories';
 import { useGameStore } from '../store/useGameStore';
-import { ScreenBackground } from '../components/ui/ScreenBackground';
+import { ImageBackground } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { GlassCard } from '../components/ui/GlassCard';
 import { GlossyButton } from '../components/ui/GlossyButton';
 import { CoinBadge } from '../components/ui/CoinBadge';
@@ -120,17 +121,20 @@ export const GameScreen: React.FC = () => {
 
   if (!levelData) {
     return (
-      <ScreenBackground>
+      <ImageBackground source={require('../assets/images/game_bg.jpg')} style={styles.backgroundImage} resizeMode="cover">
+      <SafeAreaView style={styles.safeArea}>
         <View style={styles.errorState}>
           <Text style={styles.errorText}>المستوى غير موجود</Text>
           <GlossyButton title="رجوع" icon="arrow-forward" onPress={() => navigation.goBack()} />
         </View>
-      </ScreenBackground>
+            </SafeAreaView>
+    </ImageBackground>
     );
   }
 
   return (
-    <ScreenBackground>
+    <ImageBackground source={require('../assets/images/game_bg.jpg')} style={styles.backgroundImage} resizeMode="cover">
+      <SafeAreaView style={styles.safeArea}>
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity style={styles.backBtn} onPress={() => navigation.goBack()}>
@@ -250,11 +254,20 @@ export const GameScreen: React.FC = () => {
           </GlassCard>
         </View>
       </Modal>
-    </ScreenBackground>
+          </SafeAreaView>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+  },
+  safeArea: {
+    flex: 1,
+  },
   audioBtn: {
     borderRadius: 12,
     overflow: 'hidden',
