@@ -1,0 +1,309 @@
+{
+  "id": 47,
+  "width": 6,
+  "height": 6,
+  "cells": [
+    {
+      "row": 0,
+      "col": 0,
+      "type": "clue",
+      "text": "عكس المدينة",
+      "arrows": [
+        {
+          "direction": "down",
+          "target_word_id": "w3"
+        }
+      ]
+    },
+    {
+      "row": 0,
+      "col": 1,
+      "type": "empty_block"
+    },
+    {
+      "row": 0,
+      "col": 2,
+      "type": "empty_block"
+    },
+    {
+      "row": 0,
+      "col": 3,
+      "type": "empty_block"
+    },
+    {
+      "row": 0,
+      "col": 4,
+      "type": "clue",
+      "text": "خمسة في كل يد",
+      "arrows": [
+        {
+          "direction": "down",
+          "target_word_id": "w2"
+        }
+      ]
+    },
+    {
+      "row": 0,
+      "col": 5,
+      "type": "empty_block"
+    },
+    {
+      "row": 1,
+      "col": 0,
+      "type": "input",
+      "answer_char": "ق",
+      "part_of_words": [
+        "w1",
+        "w3"
+      ]
+    },
+    {
+      "row": 1,
+      "col": 1,
+      "type": "input",
+      "answer_char": "ي",
+      "part_of_words": [
+        "w1"
+      ]
+    },
+    {
+      "row": 1,
+      "col": 2,
+      "type": "input",
+      "answer_char": "ر",
+      "part_of_words": [
+        "w1"
+      ]
+    },
+    {
+      "row": 1,
+      "col": 3,
+      "type": "input",
+      "answer_char": "ب",
+      "part_of_words": [
+        "w1"
+      ]
+    },
+    {
+      "row": 1,
+      "col": 4,
+      "type": "input",
+      "answer_char": "إ",
+      "part_of_words": [
+        "w1",
+        "w2"
+      ]
+    },
+    {
+      "row": 1,
+      "col": 5,
+      "type": "clue",
+      "text": "نصب منه الشاي",
+      "arrows": [
+        {
+          "direction": "left",
+          "target_word_id": "w1"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "col": 0,
+      "type": "input",
+      "answer_char": "ر",
+      "part_of_words": [
+        "w3"
+      ]
+    },
+    {
+      "row": 2,
+      "col": 1,
+      "type": "empty_block"
+    },
+    {
+      "row": 2,
+      "col": 2,
+      "type": "empty_block"
+    },
+    {
+      "row": 2,
+      "col": 3,
+      "type": "empty_block"
+    },
+    {
+      "row": 2,
+      "col": 4,
+      "type": "input",
+      "answer_char": "ص",
+      "part_of_words": [
+        "w2"
+      ]
+    },
+    {
+      "row": 2,
+      "col": 5,
+      "type": "empty_block"
+    },
+    {
+      "row": 3,
+      "col": 0,
+      "type": "input",
+      "answer_char": "ي",
+      "part_of_words": [
+        "w3"
+      ]
+    },
+    {
+      "row": 3,
+      "col": 1,
+      "type": "empty_block"
+    },
+    {
+      "row": 3,
+      "col": 2,
+      "type": "empty_block"
+    },
+    {
+      "row": 3,
+      "col": 3,
+      "type": "empty_block"
+    },
+    {
+      "row": 3,
+      "col": 4,
+      "type": "input",
+      "answer_char": "ب",
+      "part_of_words": [
+        "w2"
+      ]
+    },
+    {
+      "row": 3,
+      "col": 5,
+      "type": "empty_block"
+    },
+    {
+      "row": 4,
+      "col": 0,
+      "type": "input",
+      "answer_char": "ة",
+      "part_of_words": [
+        "w3",
+        "w4"
+      ]
+    },
+    {
+      "row": 4,
+      "col": 1,
+      "type": "input",
+      "answer_char": "ف",
+      "part_of_words": [
+        "w4"
+      ]
+    },
+    {
+      "row": 4,
+      "col": 2,
+      "type": "input",
+      "answer_char": "ص",
+      "part_of_words": [
+        "w4"
+      ]
+    },
+    {
+      "row": 4,
+      "col": 3,
+      "type": "input",
+      "answer_char": "ا",
+      "part_of_words": [
+        "w4"
+      ]
+    },
+    {
+      "row": 4,
+      "col": 4,
+      "type": "input",
+      "answer_char": "ع",
+      "part_of_words": [
+        "w2",
+        "w4"
+      ]
+    },
+    {
+      "row": 4,
+      "col": 5,
+      "type": "clue",
+      "text": "ريح شديدة",
+      "arrows": [
+        {
+          "direction": "left",
+          "target_word_id": "w4"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "col": 0,
+      "type": "empty_block"
+    },
+    {
+      "row": 5,
+      "col": 1,
+      "type": "empty_block"
+    },
+    {
+      "row": 5,
+      "col": 2,
+      "type": "empty_block"
+    },
+    {
+      "row": 5,
+      "col": 3,
+      "type": "empty_block"
+    },
+    {
+      "row": 5,
+      "col": 4,
+      "type": "empty_block"
+    },
+    {
+      "row": 5,
+      "col": 5,
+      "type": "empty_block"
+    }
+  ],
+  "words": {
+    "w1": {
+      "answer": "إبريق",
+      "direction": "horizontal",
+      "start_cell": {
+        "row": 1,
+        "col": 4
+      }
+    },
+    "w2": {
+      "answer": "إصبع",
+      "direction": "vertical",
+      "start_cell": {
+        "row": 1,
+        "col": 4
+      }
+    },
+    "w3": {
+      "answer": "قرية",
+      "direction": "vertical",
+      "start_cell": {
+        "row": 1,
+        "col": 0
+      }
+    },
+    "w4": {
+      "answer": "عاصفة",
+      "direction": "horizontal",
+      "start_cell": {
+        "row": 4,
+        "col": 4
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+[
+  { "id": "general",      "title": "معلومات عامة",    "description": "ألغاز متنوعة للمبتدئين",       "icon": "bulb",        "iconFamily": "Ionicons", "isPremium": false, "cost": 0,    "gradient": ["#7F7FD5", "#86A8E7"] },
+  { "id": "animals",      "title": "عالم الحيوان",    "description": "من الأسد إلى النملة",          "icon": "paw",         "iconFamily": "Ionicons", "isPremium": false, "cost": 0,    "gradient": ["#56AB2F", "#A8E063"] },
+  { "id": "food",         "title": "مطبخ وأكلات",     "description": "أطباق عربية وعالمية",          "icon": "restaurant",  "iconFamily": "Ionicons", "isPremium": false, "cost": 0,    "gradient": ["#F7971E", "#FFD200"] },
+  { "id": "islamic",      "title": "تاريخ إسلامي",    "description": "سير وأعلام ومعارك خالدة",      "icon": "moon",        "iconFamily": "Ionicons", "isPremium": false, "cost": 0,    "gradient": ["#11998E", "#38EF7D"] },
+  { "id": "capitals",     "title": "عواصم ودول",      "description": "جولة حول خريطة العالم",        "icon": "earth",       "iconFamily": "Ionicons", "isPremium": false, "cost": 0,    "gradient": ["#2193B0", "#6DD5ED"] },
+  { "id": "football",     "title": "كرة القدم",       "description": "أندية ونجوم وبطولات",          "icon": "football",    "iconFamily": "Ionicons", "isPremium": true,  "cost": 300,  "gradient": ["#0F9B0F", "#3CA55C"] },
+  { "id": "movies",       "title": "سينما وتلفزيون",  "description": "أفلام ومسلسلات وممثلون",       "icon": "film",        "iconFamily": "Ionicons", "isPremium": true,  "cost": 300,  "gradient": ["#C33764", "#1D2671"] },
+  { "id": "cars",         "title": "عالم السيارات",   "description": "ماركات وموديلات ومحركات",      "icon": "car-sport",   "iconFamily": "Ionicons", "isPremium": true,  "cost": 500,  "gradient": ["#E52D27", "#B31217"] },
+  { "id": "science",      "title": "علوم وتكنولوجيا", "description": "اختراعات وعلماء وفضاء",        "icon": "flask",       "iconFamily": "Ionicons", "isPremium": true,  "cost": 500,  "gradient": ["#00C6FF", "#0072FF"] },
+  { "id": "proverbs",     "title": "أمثال شعبية",     "description": "حكمة الأجداد في كلمات",        "icon": "chatbubbles", "iconFamily": "Ionicons", "isPremium": true,  "cost": 500,  "gradient": ["#DA4453", "#89216B"] },
+  { "id": "poetry",       "title": "شعر وأدب",        "description": "شعراء المعلقات والأدب الحديث", "icon": "reader",      "iconFamily": "Ionicons", "isPremium": true,  "cost": 1000, "gradient": ["#8E2DE2", "#4A00E0"] },
+  { "id": "arab_history", "title": "حضارات عربية",   "description": "من الأندلس إلى بغداد",         "icon": "library",     "iconFamily": "Ionicons", "isPremium": true,  "cost": 1000, "gradient": ["#B79891", "#94716B"] }
+]

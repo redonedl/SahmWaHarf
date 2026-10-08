@@ -1,0 +1,234 @@
+{
+  "id": 11,
+  "width": 5,
+  "height": 5,
+  "cells": [
+    {
+      "row": 0,
+      "col": 0,
+      "type": "empty_block"
+    },
+    {
+      "row": 0,
+      "col": 1,
+      "type": "clue",
+      "text": "العربية ___ الضاد",
+      "arrows": [
+        {
+          "direction": "down",
+          "target_word_id": "w3"
+        }
+      ]
+    },
+    {
+      "row": 0,
+      "col": 2,
+      "type": "empty_block"
+    },
+    {
+      "row": 0,
+      "col": 3,
+      "type": "clue",
+      "text": "صنّاجة العرب (بدون أل)",
+      "arrows": [
+        {
+          "direction": "down",
+          "target_word_id": "w2"
+        }
+      ]
+    },
+    {
+      "row": 0,
+      "col": 4,
+      "type": "empty_block"
+    },
+    {
+      "row": 1,
+      "col": 0,
+      "type": "empty_block"
+    },
+    {
+      "row": 1,
+      "col": 1,
+      "type": "input",
+      "answer_char": "ل",
+      "part_of_words": [
+        "w1",
+        "w3"
+      ]
+    },
+    {
+      "row": 1,
+      "col": 2,
+      "type": "input",
+      "answer_char": "م",
+      "part_of_words": [
+        "w1"
+      ]
+    },
+    {
+      "row": 1,
+      "col": 3,
+      "type": "input",
+      "answer_char": "أ",
+      "part_of_words": [
+        "w1",
+        "w2"
+      ]
+    },
+    {
+      "row": 1,
+      "col": 4,
+      "type": "clue",
+      "text": "___ دنقل شاعر مصري",
+      "arrows": [
+        {
+          "direction": "left",
+          "target_word_id": "w1"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "col": 0,
+      "type": "empty_block"
+    },
+    {
+      "row": 2,
+      "col": 1,
+      "type": "input",
+      "answer_char": "غ",
+      "part_of_words": [
+        "w3"
+      ]
+    },
+    {
+      "row": 2,
+      "col": 2,
+      "type": "empty_block"
+    },
+    {
+      "row": 2,
+      "col": 3,
+      "type": "input",
+      "answer_char": "ع",
+      "part_of_words": [
+        "w2"
+      ]
+    },
+    {
+      "row": 2,
+      "col": 4,
+      "type": "empty_block"
+    },
+    {
+      "row": 3,
+      "col": 0,
+      "type": "empty_block"
+    },
+    {
+      "row": 3,
+      "col": 1,
+      "type": "input",
+      "answer_char": "ة",
+      "part_of_words": [
+        "w3",
+        "w4"
+      ]
+    },
+    {
+      "row": 3,
+      "col": 2,
+      "type": "input",
+      "answer_char": "د",
+      "part_of_words": [
+        "w4"
+      ]
+    },
+    {
+      "row": 3,
+      "col": 3,
+      "type": "input",
+      "answer_char": "ش",
+      "part_of_words": [
+        "w2",
+        "w4"
+      ]
+    },
+    {
+      "row": 3,
+      "col": 4,
+      "type": "clue",
+      "text": "حرفان في حرف",
+      "arrows": [
+        {
+          "direction": "left",
+          "target_word_id": "w4"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "col": 0,
+      "type": "empty_block"
+    },
+    {
+      "row": 4,
+      "col": 1,
+      "type": "empty_block"
+    },
+    {
+      "row": 4,
+      "col": 2,
+      "type": "empty_block"
+    },
+    {
+      "row": 4,
+      "col": 3,
+      "type": "input",
+      "answer_char": "ى",
+      "part_of_words": [
+        "w2"
+      ]
+    },
+    {
+      "row": 4,
+      "col": 4,
+      "type": "empty_block"
+    }
+  ],
+  "words": {
+    "w1": {
+      "answer": "أمل",
+      "direction": "horizontal",
+      "start_cell": {
+        "row": 1,
+        "col": 3
+      }
+    },
+    "w2": {
+      "answer": "أعشى",
+      "direction": "vertical",
+      "start_cell": {
+        "row": 1,
+        "col": 3
+      }
+    },
+    "w3": {
+      "answer": "لغة",
+      "direction": "vertical",
+      "start_cell": {
+        "row": 1,
+        "col": 1
+      }
+    },
+    "w4": {
+      "answer": "شدة",
+      "direction": "horizontal",
+      "start_cell": {
+        "row": 3,
+        "col": 3
+      }
+    }
+  }
+}

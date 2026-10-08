@@ -1,0 +1,246 @@
+{
+  "id": 19,
+  "width": 5,
+  "height": 5,
+  "cells": [
+    {
+      "row": 0,
+      "col": 0,
+      "type": "clue",
+      "text": "أم المؤمنين بنت زمعة",
+      "arrows": [
+        {
+          "direction": "down",
+          "target_word_id": "w3"
+        }
+      ]
+    },
+    {
+      "row": 0,
+      "col": 1,
+      "type": "empty_block"
+    },
+    {
+      "row": 0,
+      "col": 2,
+      "type": "empty_block"
+    },
+    {
+      "row": 0,
+      "col": 3,
+      "type": "clue",
+      "text": "نبي ألقاه إخوته في البئر",
+      "arrows": [
+        {
+          "direction": "down",
+          "target_word_id": "w2"
+        }
+      ]
+    },
+    {
+      "row": 0,
+      "col": 4,
+      "type": "empty_block"
+    },
+    {
+      "row": 1,
+      "col": 0,
+      "type": "input",
+      "answer_char": "س",
+      "part_of_words": [
+        "w1",
+        "w3"
+      ]
+    },
+    {
+      "row": 1,
+      "col": 1,
+      "type": "input",
+      "answer_char": "ن",
+      "part_of_words": [
+        "w1"
+      ]
+    },
+    {
+      "row": 1,
+      "col": 2,
+      "type": "input",
+      "answer_char": "و",
+      "part_of_words": [
+        "w1"
+      ]
+    },
+    {
+      "row": 1,
+      "col": 3,
+      "type": "input",
+      "answer_char": "ي",
+      "part_of_words": [
+        "w1",
+        "w2"
+      ]
+    },
+    {
+      "row": 1,
+      "col": 4,
+      "type": "clue",
+      "text": "نبي ابتلعه الحوت",
+      "arrows": [
+        {
+          "direction": "left",
+          "target_word_id": "w1"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "col": 0,
+      "type": "input",
+      "answer_char": "و",
+      "part_of_words": [
+        "w3"
+      ]
+    },
+    {
+      "row": 2,
+      "col": 1,
+      "type": "empty_block"
+    },
+    {
+      "row": 2,
+      "col": 2,
+      "type": "empty_block"
+    },
+    {
+      "row": 2,
+      "col": 3,
+      "type": "input",
+      "answer_char": "و",
+      "part_of_words": [
+        "w2"
+      ]
+    },
+    {
+      "row": 2,
+      "col": 4,
+      "type": "empty_block"
+    },
+    {
+      "row": 3,
+      "col": 0,
+      "type": "input",
+      "answer_char": "د",
+      "part_of_words": [
+        "w3",
+        "w4"
+      ]
+    },
+    {
+      "row": 3,
+      "col": 1,
+      "type": "input",
+      "answer_char": "ي",
+      "part_of_words": [
+        "w4"
+      ]
+    },
+    {
+      "row": 3,
+      "col": 2,
+      "type": "input",
+      "answer_char": "ع",
+      "part_of_words": [
+        "w4"
+      ]
+    },
+    {
+      "row": 3,
+      "col": 3,
+      "type": "input",
+      "answer_char": "س",
+      "part_of_words": [
+        "w2",
+        "w4"
+      ]
+    },
+    {
+      "row": 3,
+      "col": 4,
+      "type": "clue",
+      "text": "___ بن زيد من العشرة المبشرين",
+      "arrows": [
+        {
+          "direction": "left",
+          "target_word_id": "w4"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "col": 0,
+      "type": "input",
+      "answer_char": "ة",
+      "part_of_words": [
+        "w3"
+      ]
+    },
+    {
+      "row": 4,
+      "col": 1,
+      "type": "empty_block"
+    },
+    {
+      "row": 4,
+      "col": 2,
+      "type": "empty_block"
+    },
+    {
+      "row": 4,
+      "col": 3,
+      "type": "input",
+      "answer_char": "ف",
+      "part_of_words": [
+        "w2"
+      ]
+    },
+    {
+      "row": 4,
+      "col": 4,
+      "type": "empty_block"
+    }
+  ],
+  "words": {
+    "w1": {
+      "answer": "يونس",
+      "direction": "horizontal",
+      "start_cell": {
+        "row": 1,
+        "col": 3
+      }
+    },
+    "w2": {
+      "answer": "يوسف",
+      "direction": "vertical",
+      "start_cell": {
+        "row": 1,
+        "col": 3
+      }
+    },
+    "w3": {
+      "answer": "سودة",
+      "direction": "vertical",
+      "start_cell": {
+        "row": 1,
+        "col": 0
+      }
+    },
+    "w4": {
+      "answer": "سعيد",
+      "direction": "horizontal",
+      "start_cell": {
+        "row": 3,
+        "col": 3
+      }
+    }
+  }
+}

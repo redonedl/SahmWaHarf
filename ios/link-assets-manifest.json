@@ -1,0 +1,29 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/Cairo-Bold.ttf",
+      "sha1": "7776e206838d250bb2b3d8d7af69c1112644413c"
+    },
+    {
+      "path": "src/assets/fonts/Cairo-Regular.ttf",
+      "sha1": "c0555ee2ffd2e96f9dec90b955b9845b6fe6a20c"
+    },
+    {
+      "path": "src/assets/fonts/ElMessiri-Bold.ttf",
+      "sha1": "18fc09693f7c0b1372f580083891cf3c8a1e0d7a"
+    },
+    {
+      "path": "src/assets/fonts/ElMessiri-Medium.ttf",
+      "sha1": "ddfc977646112b616fd81bfe1745f3d87cb229ad"
+    },
+    {
+      "path": "src/assets/fonts/ElMessiri-Regular.ttf",
+      "sha1": "90e4f9704e397c9a412f7c0c27958af106901389"
+    },
+    {
+      "path": "src/assets/fonts/ElMessiri-SemiBold.ttf",
+      "sha1": "8f0fc4b725f147179fe331bdb9f716c963082fe3"
+    }
+  ]
+}

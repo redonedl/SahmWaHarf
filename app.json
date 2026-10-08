@@ -1,4 +1,8 @@
 {
   "name": "WordsGame",
-  "displayName": "WordsGame"
+  "displayName": "WordsGame",
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-7276264500805485~2851843208",
+    "ios_app_id": "ca-app-pub-7276264500805485~2851843208"
+  }
 }

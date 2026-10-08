@@ -1,0 +1,317 @@
+{
+  "id": 45,
+  "width": 6,
+  "height": 6,
+  "cells": [
+    {
+      "row": 0,
+      "col": 0,
+      "type": "clue",
+      "text": "نوع أفلام عاطفية جادة",
+      "arrows": [
+        {
+          "direction": "down",
+          "target_word_id": "w3"
+        }
+      ]
+    },
+    {
+      "row": 0,
+      "col": 1,
+      "type": "empty_block"
+    },
+    {
+      "row": 0,
+      "col": 2,
+      "type": "empty_block"
+    },
+    {
+      "row": 0,
+      "col": 3,
+      "type": "empty_block"
+    },
+    {
+      "row": 0,
+      "col": 4,
+      "type": "clue",
+      "text": "___ عبد العزيز رأفت الهجان",
+      "arrows": [
+        {
+          "direction": "down",
+          "target_word_id": "w2"
+        }
+      ]
+    },
+    {
+      "row": 0,
+      "col": 5,
+      "type": "empty_block"
+    },
+    {
+      "row": 1,
+      "col": 0,
+      "type": "input",
+      "answer_char": "د",
+      "part_of_words": [
+        "w1",
+        "w3"
+      ]
+    },
+    {
+      "row": 1,
+      "col": 1,
+      "type": "input",
+      "answer_char": "ه",
+      "part_of_words": [
+        "w1"
+      ]
+    },
+    {
+      "row": 1,
+      "col": 2,
+      "type": "input",
+      "answer_char": "ا",
+      "part_of_words": [
+        "w1"
+      ]
+    },
+    {
+      "row": 1,
+      "col": 3,
+      "type": "input",
+      "answer_char": "ش",
+      "part_of_words": [
+        "w1"
+      ]
+    },
+    {
+      "row": 1,
+      "col": 4,
+      "type": "input",
+      "answer_char": "م",
+      "part_of_words": [
+        "w1",
+        "w2"
+      ]
+    },
+    {
+      "row": 1,
+      "col": 5,
+      "type": "clue",
+      "text": "يتابع الفيلم",
+      "arrows": [
+        {
+          "direction": "left",
+          "target_word_id": "w1"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "col": 0,
+      "type": "input",
+      "answer_char": "ر",
+      "part_of_words": [
+        "w3"
+      ]
+    },
+    {
+      "row": 2,
+      "col": 1,
+      "type": "empty_block"
+    },
+    {
+      "row": 2,
+      "col": 2,
+      "type": "empty_block"
+    },
+    {
+      "row": 2,
+      "col": 3,
+      "type": "empty_block"
+    },
+    {
+      "row": 2,
+      "col": 4,
+      "type": "input",
+      "answer_char": "ح",
+      "part_of_words": [
+        "w2"
+      ]
+    },
+    {
+      "row": 2,
+      "col": 5,
+      "type": "empty_block"
+    },
+    {
+      "row": 3,
+      "col": 0,
+      "type": "input",
+      "answer_char": "ا",
+      "part_of_words": [
+        "w3",
+        "w4"
+      ]
+    },
+    {
+      "row": 3,
+      "col": 1,
+      "type": "input",
+      "answer_char": "ي",
+      "part_of_words": [
+        "w4"
+      ]
+    },
+    {
+      "row": 3,
+      "col": 2,
+      "type": "input",
+      "answer_char": "ا",
+      "part_of_words": [
+        "w4"
+      ]
+    },
+    {
+      "row": 3,
+      "col": 3,
+      "type": "input",
+      "answer_char": "ر",
+      "part_of_words": [
+        "w4"
+      ]
+    },
+    {
+      "row": 3,
+      "col": 4,
+      "type": "input",
+      "answer_char": "م",
+      "part_of_words": [
+        "w2",
+        "w4"
+      ]
+    },
+    {
+      "row": 3,
+      "col": 5,
+      "type": "clue",
+      "text": "مسلسل ياسر العظمة الساخر",
+      "arrows": [
+        {
+          "direction": "left",
+          "target_word_id": "w4"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "col": 0,
+      "type": "input",
+      "answer_char": "م",
+      "part_of_words": [
+        "w3"
+      ]
+    },
+    {
+      "row": 4,
+      "col": 1,
+      "type": "empty_block"
+    },
+    {
+      "row": 4,
+      "col": 2,
+      "type": "empty_block"
+    },
+    {
+      "row": 4,
+      "col": 3,
+      "type": "empty_block"
+    },
+    {
+      "row": 4,
+      "col": 4,
+      "type": "input",
+      "answer_char": "و",
+      "part_of_words": [
+        "w2"
+      ]
+    },
+    {
+      "row": 4,
+      "col": 5,
+      "type": "empty_block"
+    },
+    {
+      "row": 5,
+      "col": 0,
+      "type": "input",
+      "answer_char": "ا",
+      "part_of_words": [
+        "w3"
+      ]
+    },
+    {
+      "row": 5,
+      "col": 1,
+      "type": "empty_block"
+    },
+    {
+      "row": 5,
+      "col": 2,
+      "type": "empty_block"
+    },
+    {
+      "row": 5,
+      "col": 3,
+      "type": "empty_block"
+    },
+    {
+      "row": 5,
+      "col": 4,
+      "type": "input",
+      "answer_char": "د",
+      "part_of_words": [
+        "w2"
+      ]
+    },
+    {
+      "row": 5,
+      "col": 5,
+      "type": "empty_block"
+    }
+  ],
+  "words": {
+    "w1": {
+      "answer": "مشاهد",
+      "direction": "horizontal",
+      "start_cell": {
+        "row": 1,
+        "col": 4
+      }
+    },
+    "w2": {
+      "answer": "محمود",
+      "direction": "vertical",
+      "start_cell": {
+        "row": 1,
+        "col": 4
+      }
+    },
+    "w3": {
+      "answer": "دراما",
+      "direction": "vertical",
+      "start_cell": {
+        "row": 1,
+        "col": 0
+      }
+    },
+    "w4": {
+      "answer": "مرايا",
+      "direction": "horizontal",
+      "start_cell": {
+        "row": 3,
+        "col": 4
+      }
+    }
+  }
+}
