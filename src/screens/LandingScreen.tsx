@@ -58,10 +58,10 @@ export const LandingScreen: React.FC = () => {
               <Text style={styles.subtitle}>اكتشف الكلمات • نمي معرفتك • استمتع بالتحدي</Text>
             </View>
 
-            {/* MIDDLE: 3D Center Logo */}
+            {/* MIDDLE: 3D Center Logo (Transparent) */}
             <View style={styles.middleSection}>
               <Image 
-                source={require('../assets/images/center_logo.jpg')}
+                source={require('../assets/images/center_logo_transparent.png')}
                 style={styles.centerLogoImage}
                 resizeMode="contain"
               />
