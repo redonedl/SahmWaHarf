@@ -60,15 +60,9 @@ export const LandingScreen: React.FC = () => {
 
             {/* MIDDLE: 3D Center Logo */}
             <View style={styles.middleSection}>
-              <Animated.Image 
+              <Image 
                 source={require('../assets/images/center_logo.jpg')}
-                style={[
-                  styles.centerLogoImage, 
-                  { 
-                    opacity: glowOpacity,
-                    transform: [{ scale: glowAnim.interpolate({ inputRange: [0, 1], outputRange: [1, 1.05] }) }]
-                  }
-                ]}
+                style={styles.centerLogoImage}
                 resizeMode="contain"
               />
             </View>
@@ -137,8 +131,6 @@ const styles = StyleSheet.create({
     width: width * 0.45,
     height: width * 0.45,
     borderRadius: 20,
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.1)',
   },
   mainLogo: {
     width: width * 0.75,
