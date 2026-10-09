@@ -15,8 +15,8 @@ export const HeroLogo: React.FC = () => {
 
 const styles = StyleSheet.create({
   container: {
-    width: 250,
-    height: 250,
+    width: 210,
+    height: 210,
     alignItems: 'center',
     justifyContent: 'center',
     marginVertical: 10,

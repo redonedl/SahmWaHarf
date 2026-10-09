@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Image, ScrollView } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
@@ -44,46 +45,48 @@ export const LandingScreen: React.FC = () => {
       <View style={[styles.orb, { top: 250, left: -100, width: 300, height: 300, backgroundColor: '#1E3A8A' }]} />
       <View style={[styles.orb, { bottom: -100, right: -50, width: 200, height: 200, backgroundColor: '#312E81' }]} />
 
-      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-        
-        {/* Main Image Logo in Middle Top */}
-        <Image 
-          source={require('../assets/images/logo.png')}
-          style={styles.mainLogo}
-          resizeMode="contain"
-        />
-        
-        <Text style={styles.title}>ألعاب متنوعة للمبتدئين</Text>
-        <Text style={styles.subtitle}>اكتشف الكلمات • نمي معرفتك • استمتع بالتحدي</Text>
+      <SafeAreaView style={{ flex: 1 }} edges={['top', 'bottom']}>
+        <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+          
+          {/* Main Image Logo in Middle Top */}
+          <Image 
+            source={require('../assets/images/logo.png')}
+            style={styles.mainLogo}
+            resizeMode="contain"
+          />
+          
+          <Text style={styles.title}>ألعاب متنوعة للمبتدئين</Text>
+          <Text style={styles.subtitle}>اكتشف الكلمات • نمي معرفتك • استمتع بالتحدي</Text>
 
-        {/* 3D Center Image Logo */}
-        <View style={styles.podiumContainer}>
-           <HeroLogo />
-        </View>
+          {/* 3D Center Image Logo */}
+          <View style={styles.podiumContainer}>
+             <HeroLogo />
+          </View>
 
-        {/* Play Button */}
-        <TouchableOpacity activeOpacity={0.8} onPress={handlePlay} style={styles.playButtonWrapper}>
-          <LinearGradient 
-            colors={['#10B981', '#059669']} 
-            start={{x: 0, y: 0}} end={{x: 0, y: 1}}
-            style={styles.playButton}
-          >
-            <View style={styles.playButtonInner}>
-              <Text style={styles.playButtonText}>ابدأ اللعب</Text>
-              <Icon name="play" size={24} color="#FFF" style={{ marginRight: 8 }} />
-            </View>
-          </LinearGradient>
-        </TouchableOpacity>
+          {/* Play Button */}
+          <TouchableOpacity activeOpacity={0.8} onPress={handlePlay} style={styles.playButtonWrapper}>
+            <LinearGradient 
+              colors={['#10B981', '#059669']} 
+              start={{x: 0, y: 0}} end={{x: 0, y: 1}}
+              style={styles.playButton}
+            >
+              <View style={styles.playButtonInner}>
+                <Text style={styles.playButtonText}>ابدأ اللعب</Text>
+                <Icon name="play" size={24} color="#FFF" style={{ marginRight: 8 }} />
+              </View>
+            </LinearGradient>
+          </TouchableOpacity>
 
-        {/* Category Grid */}
-        <View style={styles.categoriesRow}>
-          <CategoryItem icon="bulb" title="معلومات عامة" subtitle="اختبر معرفتك" color="#FBBF24" />
-          <CategoryItem icon="paw" title="عالم الحيوان" subtitle="من الأسد إلى النملة" color="#34D399" />
-          <CategoryItem icon="restaurant" title="مطبخ وأكلات" subtitle="أطباق عربية وعالمية" color="#F97316" />
-          <CategoryItem icon="moon" title="تاريخ إسلامي" subtitle="رحلة عبر العصور" color="#06B6D4" />
-        </View>
+          {/* Category Grid */}
+          <View style={styles.categoriesRow}>
+            <CategoryItem icon="bulb" title="معلومات عامة" subtitle="اختبر معرفتك" color="#FBBF24" />
+            <CategoryItem icon="paw" title="عالم الحيوان" subtitle="من الأسد إلى النملة" color="#34D399" />
+            <CategoryItem icon="restaurant" title="مطبخ وأكلات" subtitle="أطباق عربية وعالمية" color="#F97316" />
+            <CategoryItem icon="moon" title="تاريخ إسلامي" subtitle="رحلة عبر العصور" color="#06B6D4" />
+          </View>
 
-      </ScrollView>
+        </ScrollView>
+      </SafeAreaView>
     </View>
   );
 };
@@ -95,8 +98,8 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     alignItems: 'center',
-    paddingTop: 40,
-    paddingBottom: 40,
+    paddingTop: 10,
+    paddingBottom: 20,
   },
   orb: {
     position: 'absolute',
@@ -105,33 +108,34 @@ const styles = StyleSheet.create({
     transform: [{ scale: 1.5 }],
   },
   mainLogo: {
-    width: width * 0.75,
-    height: 120,
+    width: width * 0.65,
+    height: 90,
     marginBottom: 5,
   },
   title: {
     fontFamily: glass.fonts.bold,
-    fontSize: 22,
+    fontSize: 20,
     color: '#ffffff',
     textShadowColor: 'rgba(255, 255, 255, 0.5)',
     textShadowOffset: { width: 0, height: 0 },
     textShadowRadius: 10,
     textAlign: 'center',
+    marginBottom: 2,
   },
   subtitle: {
     fontFamily: glass.fonts.regular,
-    fontSize: 14,
+    fontSize: 13,
     color: '#E2E8F0',
-    marginTop: 5,
     textAlign: 'center',
+    marginBottom: 20,
   },
   podiumContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: 250,
-    height: 250,
-    marginTop: 15,
-    marginBottom: 10,
+    width: 210,
+    height: 210,
+    marginTop: 10,
+    marginBottom: 35,
   },
   podiumBase: {
     position: 'absolute',
