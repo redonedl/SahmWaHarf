@@ -56,10 +56,8 @@ export const LandingScreen: React.FC = () => {
         <Text style={styles.title}>ألعاب متنوعة للمبتدئين</Text>
         <Text style={styles.subtitle}>اكتشف الكلمات • نمي معرفتك • استمتع بالتحدي</Text>
 
-        {/* 3D Podium & HeroLogo */}
+        {/* 3D Center Image Logo */}
         <View style={styles.podiumContainer}>
-           <View style={styles.podiumBase} />
-           <View style={styles.podiumTop} />
            <HeroLogo />
         </View>
 
