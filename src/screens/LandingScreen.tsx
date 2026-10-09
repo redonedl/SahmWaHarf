@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Image, ScrollView, ImageBackground, Animated } from 'react-native';
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Image, ScrollView, ImageBackground } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -12,21 +12,6 @@ const { width } = Dimensions.get('window');
 
 export const LandingScreen: React.FC = () => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-
-
-  const glowAnim = useRef(new Animated.Value(0)).current;
-
-  useEffect(() => {
-    Animated.loop(
-      Animated.sequence([
-        Animated.timing(glowAnim, { toValue: 1, duration: 1800, useNativeDriver: false }),
-        Animated.timing(glowAnim, { toValue: 0, duration: 1800, useNativeDriver: false }),
-      ])
-    ).start();
-  }, [glowAnim]);
-
-  const glowRadius = glowAnim.interpolate({ inputRange: [0, 1], outputRange: [6, 22] });
-  const glowOpacity = glowAnim.interpolate({ inputRange: [0, 1], outputRange: [0.7, 1] });
 
   const handlePlay = () => {
     navigation.navigate('Categories');
@@ -47,25 +32,13 @@ export const LandingScreen: React.FC = () => {
           
           <View style={styles.contentWrapper}>
             
-            {/* TOP SECTION */}
-            <View style={styles.topSection}>
-              <Image 
-                source={require('../assets/images/logo.png')}
-                style={styles.mainLogo}
+            {/* MIDDLE: Hero banner (logo + title + subtitle as image) */}
+            <View style={styles.middleSection}>
+              <Image
+                source={require('../assets/images/hero_banner.png')}
+                style={styles.heroBanner}
                 resizeMode="contain"
               />
-              <Text style={styles.title}>ألعاب متنوعة للمبتدئين</Text>
-              <Text style={styles.subtitle}>اكتشف الكلمات • نمي معرفتك • استمتع بالتحدي</Text>
-            </View>
-
-            {/* MIDDLE: Glowing neon text above the pedestal */}
-            <View style={styles.middleSection}>
-              <Animated.Text style={[styles.neonLine1, { opacity: glowOpacity, textShadowRadius: glowRadius }]}>
-                تحدّى نفسك
-              </Animated.Text>
-              <Animated.Text style={[styles.neonLine2, { opacity: glowOpacity }]}>
-                ✦ كلمات • معرفة • مرح ✦
-              </Animated.Text>
             </View>
 
             {/* BOTTOM SECTION */}
@@ -126,28 +99,12 @@ const styles = StyleSheet.create({
   middleSection: {
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 20,
+    width: '100%',
+    paddingVertical: 10,
   },
-  neonLine1: {
-    fontFamily: glass.fonts.bold,
-    fontSize: 42,
-    color: '#E0C4FF',
-    textAlign: 'center',
-    textShadowColor: '#C084FC',
-    textShadowOffset: { width: 0, height: 0 },
-    textShadowRadius: 15,
-    letterSpacing: 2,
-    marginBottom: 8,
-  },
-  neonLine2: {
-    fontFamily: glass.fonts.regular,
-    fontSize: 16,
-    color: '#A5F3FC',
-    textAlign: 'center',
-    textShadowColor: '#06B6D4',
-    textShadowOffset: { width: 0, height: 0 },
-    textShadowRadius: 12,
-    letterSpacing: 1,
+  heroBanner: {
+    width: width * 0.92,
+    height: (width * 0.92) * (200 / 634), // preserve aspect ratio of the image (~634x200)
   },
   mainLogo: {
     width: width * 0.75,
