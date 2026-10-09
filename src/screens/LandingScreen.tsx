@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Image, ImageBackground } from 'react-native';
+import React, { useEffect, useRef } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Image, ScrollView, ImageBackground, Animated } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -13,6 +13,21 @@ const { width } = Dimensions.get('window');
 export const LandingScreen: React.FC = () => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
+
+  const glowAnim = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(glowAnim, { toValue: 1, duration: 1800, useNativeDriver: false }),
+        Animated.timing(glowAnim, { toValue: 0, duration: 1800, useNativeDriver: false }),
+      ])
+    ).start();
+  }, [glowAnim]);
+
+  const glowRadius = glowAnim.interpolate({ inputRange: [0, 1], outputRange: [6, 22] });
+  const glowOpacity = glowAnim.interpolate({ inputRange: [0, 1], outputRange: [0.7, 1] });
+
   const handlePlay = () => {
     navigation.navigate('Categories');
   };
@@ -23,42 +38,64 @@ export const LandingScreen: React.FC = () => {
       style={styles.container}
       resizeMode="cover"
     >
-      <SafeAreaView style={styles.safeArea} edges={['top', 'bottom']}>
-        
-        {/* All content perfectly centered in the middle */}
-        <View style={styles.centerContent}>
+      <SafeAreaView style={{ flex: 1 }} edges={['top', 'bottom']}>
+        <ScrollView 
+          contentContainerStyle={styles.scrollContent} 
+          showsVerticalScrollIndicator={false}
+          bounces={false}
+        >
           
-          {/* Logo */}
-          <Image 
-            source={require('../assets/images/logo.png')}
-            style={styles.mainLogo}
-            resizeMode="contain"
-          />
+          <View style={styles.contentWrapper}>
+            
+            {/* TOP SECTION */}
+            <View style={styles.topSection}>
+              <Image 
+                source={require('../assets/images/logo.png')}
+                style={styles.mainLogo}
+                resizeMode="contain"
+              />
+              <Text style={styles.title}>ألعاب متنوعة للمبتدئين</Text>
+              <Text style={styles.subtitle}>اكتشف الكلمات • نمي معرفتك • استمتع بالتحدي</Text>
+            </View>
 
-          {/* Play Button */}
-          <TouchableOpacity activeOpacity={0.8} onPress={handlePlay} style={styles.playButtonWrapper}>
-            <LinearGradient 
-              colors={['#10B981', '#059669']} 
-              start={{x: 0, y: 0}} end={{x: 0, y: 1}}
-              style={styles.playButton}
-            >
-              <View style={styles.playButtonInner}>
-                <Text style={styles.playButtonText}>ابدأ اللعب</Text>
-                <Icon name="play" size={24} color="#FFF" style={{ marginRight: 8 }} />
+            {/* MIDDLE: Glowing neon text above the pedestal */}
+            <View style={styles.middleSection}>
+              <Animated.Text style={[styles.neonLine1, { opacity: glowOpacity, textShadowRadius: glowRadius }]}>
+                تحدّى نفسك
+              </Animated.Text>
+              <Animated.Text style={[styles.neonLine2, { opacity: glowOpacity }]}>
+                ✦ كلمات • معرفة • مرح ✦
+              </Animated.Text>
+            </View>
+
+            {/* BOTTOM SECTION */}
+            <View style={styles.bottomSection}>
+              {/* Play Button */}
+              <TouchableOpacity activeOpacity={0.8} onPress={handlePlay} style={styles.playButtonWrapper}>
+                <LinearGradient 
+                  colors={['#10B981', '#059669']} 
+                  start={{x: 0, y: 0}} end={{x: 0, y: 1}}
+                  style={styles.playButton}
+                >
+                  <View style={styles.playButtonInner}>
+                    <Text style={styles.playButtonText}>ابدأ اللعب</Text>
+                    <Icon name="play" size={24} color="#FFF" style={{ marginRight: 8 }} />
+                  </View>
+                </LinearGradient>
+              </TouchableOpacity>
+
+              {/* Image Category Grid Replacement */}
+              <View style={styles.categoriesImageContainer}>
+                <Image 
+                  source={require('../assets/images/categories.png')}
+                  style={styles.categoriesImage}
+                  resizeMode="contain"
+                />
               </View>
-            </LinearGradient>
-          </TouchableOpacity>
+            </View>
 
-          {/* Category icons image */}
-          <View style={styles.categoriesImageContainer}>
-            <Image 
-              source={require('../assets/images/categories.png')}
-              style={styles.categoriesImage}
-              resizeMode="contain"
-            />
           </View>
-        </View>
-
+        </ScrollView>
       </SafeAreaView>
     </ImageBackground>
   );
@@ -69,20 +106,69 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#060B26',
   },
-  safeArea: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+  scrollContent: {
+    flexGrow: 1,
   },
-  centerContent: {
+  contentWrapper: {
+    flex: 1,
     width: '100%',
+    justifyContent: 'space-between',
+    paddingVertical: 10,
+  },
+  topSection: {
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  bottomSection: {
+    alignItems: 'center',
+    marginBottom: 15,
+  },
+  middleSection: {
     alignItems: 'center',
     justifyContent: 'center',
+    paddingVertical: 20,
+  },
+  neonLine1: {
+    fontFamily: glass.fonts.bold,
+    fontSize: 42,
+    color: '#E0C4FF',
+    textAlign: 'center',
+    textShadowColor: '#C084FC',
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 15,
+    letterSpacing: 2,
+    marginBottom: 8,
+  },
+  neonLine2: {
+    fontFamily: glass.fonts.regular,
+    fontSize: 16,
+    color: '#A5F3FC',
+    textAlign: 'center',
+    textShadowColor: '#06B6D4',
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 12,
+    letterSpacing: 1,
   },
   mainLogo: {
     width: width * 0.75,
     height: 110,
-    marginBottom: 30,
+    marginBottom: 5,
+  },
+  title: {
+    fontFamily: glass.fonts.bold,
+    fontSize: 22,
+    color: '#ffffff',
+    textShadowColor: 'rgba(255, 255, 255, 0.5)',
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 10,
+    textAlign: 'center',
+    marginBottom: 4,
+  },
+  subtitle: {
+    fontFamily: glass.fonts.regular,
+    fontSize: 14,
+    color: '#E2E8F0',
+    textAlign: 'center',
   },
   playButtonWrapper: {
     width: '85%',
