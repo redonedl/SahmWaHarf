@@ -1,11 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Image } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '../navigation/types';
-import { HeroLogo } from '../components/HeroLogo';
 import { glass } from '../theme/glass';
 
 const { width } = Dimensions.get('window');
@@ -45,11 +44,14 @@ export const LandingScreen: React.FC = () => {
       <View style={[styles.orb, { bottom: -100, right: -50, width: 200, height: 200, backgroundColor: '#312E81' }]} />
       
       <View style={styles.content}>
-        <View style={styles.heroWrapper}>
-          <HeroLogo />
-        </View>
         
-        <Text style={styles.title}>سهم وحرف</Text>
+        {/* Main Image Logo in Middle */}
+        <Image 
+          source={require('../assets/images/logo.png')}
+          style={styles.mainLogo}
+          resizeMode="contain"
+        />
+        
         <Text style={styles.subtitle}>لعبة كلمات ممتعة ومسلية</Text>
 
         <LinearGradient 
@@ -100,25 +102,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
-    paddingTop: 40,
+    paddingTop: 20,
   },
-  heroWrapper: {
+  mainLogo: {
+    width: width * 0.85,
+    height: 180,
     marginBottom: 10,
-  },
-  title: {
-    fontFamily: glass.fonts.bold,
-    fontSize: 52,
-    color: '#ffffff',
-    textShadowColor: 'rgba(0, 242, 254, 0.9)',
-    textShadowOffset: { width: 0, height: 0 },
-    textShadowRadius: 20,
-    textAlign: 'center',
   },
   subtitle: {
     fontFamily: glass.fonts.regular,
     fontSize: 18,
     color: '#E2E8F0',
-    marginTop: 5,
+    marginTop: 15,
     textAlign: 'center',
   },
   divider: {
@@ -134,7 +129,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   featuresRow: {
-    flexDirection: 'row-reverse', // To match RTL layout from image
+    flexDirection: 'row-reverse',
     justifyContent: 'space-between',
     width: '100%',
     paddingHorizontal: 25,
