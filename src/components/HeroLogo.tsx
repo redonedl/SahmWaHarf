@@ -20,8 +20,8 @@ const FloatingTile: React.FC<FloatingTileProps> = ({ letter, top, bottom, left, 
   useEffect(() => {
     translateY.value = withRepeat(
       withSequence(
-        withTiming(-8, { duration: 1500 + delay, easing: Easing.inOut(Easing.ease) }),
-        withTiming(0, { duration: 1500 + delay, easing: Easing.inOut(Easing.ease) })
+        withTiming(-10, { duration: 1800 + delay, easing: Easing.inOut(Easing.ease) }),
+        withTiming(0, { duration: 1800 + delay, easing: Easing.inOut(Easing.ease) })
       ),
       -1,
       true
@@ -31,7 +31,9 @@ const FloatingTile: React.FC<FloatingTileProps> = ({ letter, top, bottom, left, 
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [
       { translateY: translateY.value }, 
-      { rotate: `${delay % 2 === 0 ? 8 : -8}deg` }
+      { rotate: `${delay % 2 === 0 ? 12 : -12}deg` },
+      { perspective: 200 },
+      { rotateX: '15deg' }
     ],
   }));
 
@@ -42,7 +44,7 @@ const FloatingTile: React.FC<FloatingTileProps> = ({ letter, top, bottom, left, 
       animatedStyle
     ]}>
       <LinearGradient 
-        colors={['#FFF5D1', '#F5D399']} 
+        colors={['#7E22CE', '#4C1D95']} 
         style={StyleSheet.absoluteFillObject} 
       />
       <View style={styles.tileInnerShadow} />
@@ -55,16 +57,15 @@ export const HeroLogo: React.FC = () => {
   return (
     <View style={styles.container}>
       {/* Floating Sparkles/Stars */}
-      <Icon name="star" size={16} color="#FFD700" style={[styles.star, { top: 20, left: 70 }]} />
-      <Icon name="star" size={24} color="#FFD700" style={[styles.star, { top: 70, right: 20 }]} />
-      <Icon name="star" size={18} color="#FFD700" style={[styles.star, { bottom: 60, left: 40 }]} />
-      <Icon name="star" size={14} color="#FFD700" style={[styles.star, { bottom: 30, right: 80 }]} />
+      <Icon name="sparkles" size={16} color="#00F2FE" style={[styles.star, { top: 20, left: 70 }]} />
+      <Icon name="star" size={24} color="#FFD700" style={[styles.star, { top: 70, right: 10 }]} />
+      <Icon name="star" size={18} color="#FFD700" style={[styles.star, { bottom: 60, left: 20 }]} />
+      <Icon name="sparkles" size={14} color="#00F2FE" style={[styles.star, { bottom: 30, right: 80 }]} />
 
       {/* Floating Letters */}
-      <FloatingTile letter="ق" top={-10} right={20} delay={0} />
-      <FloatingTile letter="م" top={0} left={30} delay={300} />
-      <FloatingTile letter="ل" bottom={40} left={-5} delay={600} />
-      <FloatingTile letter="ر" bottom={50} right={0} delay={900} />
+      <FloatingTile letter="ق" top={-10} right={10} delay={0} />
+      <FloatingTile letter="م" top={30} left={20} delay={300} />
+      <FloatingTile letter="ل" bottom={30} right={0} delay={600} />
 
       {/* Main Center Box */}
       <View style={styles.centerTileWrapper}>
@@ -83,26 +84,27 @@ export const HeroLogo: React.FC = () => {
 
 const styles = StyleSheet.create({
   container: {
-    width: 300,
-    height: 300,
+    width: 250,
+    height: 220,
     alignItems: 'center',
     justifyContent: 'center',
     marginVertical: 10,
+    zIndex: 10,
   },
   centerTileWrapper: {
-    width: 140,
-    height: 140,
-    borderRadius: 30,
+    width: 130,
+    height: 130,
+    borderRadius: 25,
     borderWidth: 3,
     borderColor: '#00F2FE',
     alignItems: 'center',
     justifyContent: 'center',
     overflow: 'hidden',
-    backgroundColor: '#1E1B4B',
+    backgroundColor: '#0F172A',
     shadowColor: '#00F2FE',
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 1,
-    shadowRadius: 25,
+    shadowRadius: 30,
     elevation: 20,
   },
   centerTileInner: {
@@ -113,12 +115,12 @@ const styles = StyleSheet.create({
   },
   centerText: {
     fontFamily: glass.fonts.bold,
-    fontSize: 85,
-    color: '#FFE259',
-    textShadowColor: 'rgba(255, 226, 89, 0.9)',
-    textShadowOffset: { width: 0, height: 3 },
+    fontSize: 80,
+    color: '#FBBF24',
+    textShadowColor: 'rgba(251, 191, 36, 0.9)',
+    textShadowOffset: { width: 0, height: 2 },
     textShadowRadius: 20,
-    marginTop: -15,
+    marginTop: -10,
   },
   arrow: {
     position: 'absolute',
@@ -129,31 +131,31 @@ const styles = StyleSheet.create({
   },
   floatingTile: {
     position: 'absolute',
-    width: 60,
-    height: 60,
-    borderRadius: 16,
+    width: 50,
+    height: 50,
+    borderRadius: 12,
     alignItems: 'center',
     justifyContent: 'center',
     overflow: 'hidden',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 5 },
-    shadowOpacity: 0.3,
+    shadowOpacity: 0.5,
     shadowRadius: 10,
     elevation: 10,
-    borderWidth: 1,
-    borderColor: '#FFF',
+    borderWidth: 1.5,
+    borderColor: '#A78BFA',
   },
   tileInnerShadow: {
     position: 'absolute',
     top: 0, left: 0, right: 0, bottom: 0,
-    borderWidth: 2,
-    borderColor: 'rgba(255,255,255,0.6)',
-    borderRadius: 16,
+    borderWidth: 1.5,
+    borderColor: 'rgba(255,255,255,0.3)',
+    borderRadius: 12,
   },
   floatingText: {
     fontFamily: glass.fonts.bold,
-    fontSize: 32,
-    color: '#1E1B4B',
+    fontSize: 26,
+    color: '#FFF',
   },
   star: {
     position: 'absolute',
