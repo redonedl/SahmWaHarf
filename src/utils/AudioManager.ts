@@ -1,4 +1,4 @@
-import { AppState } from 'react-native';
+import { AppState, Platform } from 'react-native';
 import Sound from 'react-native-sound';
 import { useGameStore } from '../store/useGameStore';
 
@@ -7,9 +7,10 @@ Sound.setCategory('Playback');
 const sounds: Record<string, Sound> = {};
 
 const loadSound = (name: string, isLoop: boolean = false) => {
-  const s = new Sound(name, Sound.MAIN_BUNDLE, (error) => {
+  const fileName = Platform.OS === 'android' ? name.replace(/\.[^/.]+$/, "") : name;
+  const s = new Sound(fileName, Sound.MAIN_BUNDLE, (error) => {
     if (error) {
-      console.log(`Failed to load sound ${name}`, error);
+      console.log(`Failed to load sound ${name} (file: ${fileName})`, error);
       return;
     }
     if (isLoop) s.setNumberOfLoops(-1);
