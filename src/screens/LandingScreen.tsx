@@ -11,24 +11,6 @@ import { HeroLogo } from '../components/HeroLogo';
 
 const { width } = Dimensions.get('window');
 
-const CategoryItem = ({ icon, title, subtitle, color }: { icon: string, title: string, subtitle: string, color: string }) => (
-  <View style={styles.categoryCard}>
-    <View style={[styles.categoryIconContainer, { borderColor: color, shadowColor: color }]}>
-      <LinearGradient 
-        colors={[`${color}30`, `${color}10`]} 
-        style={StyleSheet.absoluteFillObject}
-      />
-      <Icon name={icon} size={28} color={color} style={{
-        textShadowColor: color,
-        textShadowOffset: { width: 0, height: 0 },
-        textShadowRadius: 10,
-      }} />
-    </View>
-    <Text style={styles.categoryTitle}>{title}</Text>
-    <Text style={styles.categorySubtitle}>{subtitle}</Text>
-  </View>
-);
-
 export const LandingScreen: React.FC = () => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
@@ -77,12 +59,13 @@ export const LandingScreen: React.FC = () => {
             </LinearGradient>
           </TouchableOpacity>
 
-          {/* Category Grid */}
-          <View style={styles.categoriesRow}>
-            <CategoryItem icon="bulb" title="معلومات عامة" subtitle="اختبر معرفتك" color="#FBBF24" />
-            <CategoryItem icon="paw" title="عالم الحيوان" subtitle="من الأسد إلى النملة" color="#34D399" />
-            <CategoryItem icon="restaurant" title="مطبخ وأكلات" subtitle="أطباق عربية وعالمية" color="#F97316" />
-            <CategoryItem icon="moon" title="تاريخ إسلامي" subtitle="رحلة عبر العصور" color="#06B6D4" />
+          {/* Image Category Grid Replacement */}
+          <View style={styles.categoriesImageContainer}>
+            <Image 
+              source={require('../assets/images/categories.png')}
+              style={styles.categoriesImage}
+              resizeMode="contain"
+            />
           </View>
 
         </ScrollView>
@@ -137,34 +120,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 35,
   },
-  podiumBase: {
-    position: 'absolute',
-    bottom: 20,
-    width: 280,
-    height: 60,
-    borderRadius: 140,
-    backgroundColor: '#1E1B4B',
-    borderWidth: 2,
-    borderColor: '#D946EF',
-    shadowColor: '#D946EF',
-    shadowOpacity: 0.8,
-    shadowRadius: 20,
-    elevation: 10,
-  },
-  podiumTop: {
-    position: 'absolute',
-    bottom: 30,
-    width: 230,
-    height: 50,
-    borderRadius: 115,
-    backgroundColor: '#0B1B4D',
-    borderWidth: 2,
-    borderColor: '#00F2FE',
-    shadowColor: '#00F2FE',
-    shadowOpacity: 1,
-    shadowRadius: 15,
-    elevation: 15,
-  },
   playButtonWrapper: {
     width: '85%',
     marginBottom: 30,
@@ -196,45 +151,14 @@ const styles = StyleSheet.create({
     textShadowOffset: { width: 0, height: 2 },
     textShadowRadius: 4,
   },
-  categoriesRow: {
-    flexDirection: 'row-reverse',
-    justifyContent: 'space-between',
-    width: '100%',
-    paddingHorizontal: 10,
-    gap: 8,
-  },
-  categoryCard: {
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: 'rgba(255,255,255,0.03)',
-    borderRadius: 16,
-    paddingVertical: 15,
-    paddingHorizontal: 4,
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.1)',
-  },
-  categoryIconContainer: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    borderWidth: 1,
+  categoriesImageContainer: {
+    width: '95%',
+    height: 120,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 8,
-    overflow: 'hidden',
-    backgroundColor: 'rgba(255,255,255,0.05)',
   },
-  categoryTitle: {
-    fontFamily: glass.fonts.bold,
-    fontSize: 10,
-    color: '#FFF',
-    textAlign: 'center',
-  },
-  categorySubtitle: {
-    fontFamily: glass.fonts.regular,
-    fontSize: 8,
-    color: '#CBD5E1',
-    textAlign: 'center',
-    marginTop: 2,
+  categoriesImage: {
+    width: '100%',
+    height: '100%',
   },
 });
