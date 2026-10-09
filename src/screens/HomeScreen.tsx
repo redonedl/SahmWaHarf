@@ -258,6 +258,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row', // in RTL, row means elements start from right
     alignItems: 'center',
     marginBottom: 20,
+    gap: 15,
   },
   customCardIconCircle: {
     width: 64,
@@ -270,7 +271,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 5,
     elevation: 5,
-    marginLeft: 15,
   },
   customCardTextContainer: {
     flex: 1,
