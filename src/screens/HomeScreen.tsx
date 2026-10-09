@@ -31,6 +31,16 @@ type NavProp = NativeStackNavigationProp<RootStackParamList, 'Categories'>;
 
 // ─── Per-category card ────────────────────────────────────────────────────────
 
+const getCategoryStyles = (id: string) => {
+  switch(id) {
+    case 'general': return { bg: ['rgba(88, 68, 157, 0.95)', 'rgba(46, 32, 97, 0.95)'], accent: '#818CF8' };
+    case 'animals': return { bg: ['rgba(54, 117, 78, 0.95)', 'rgba(23, 73, 44, 0.95)'], accent: '#84CC16' };
+    case 'kitchen': return { bg: ['rgba(174, 98, 58, 0.95)', 'rgba(122, 60, 28, 0.95)'], accent: '#F59E0B' };
+    case 'islamic': return { bg: ['rgba(32, 136, 152, 0.95)', 'rgba(18, 88, 103, 0.95)'], accent: '#06B6D4' };
+    default: return { bg: ['rgba(255,255,255,0.1)', 'rgba(255,255,255,0.05)'], accent: '#94A3B8' };
+  }
+};
+
 interface CategoryCardProps {
   category: Category;
 }
@@ -88,90 +98,69 @@ const CategoryCard: React.FC<CategoryCardProps> = React.memo(({ category }) => {
     setConfirmVisible(true);
   }, []);
 
+  
+  const cardTheme = getCategoryStyles(category.id);
+  const progress = totalLevels > 0 ? (completedLevels.length / totalLevels) * 100 : 0;
+
   return (
     <>
-      <Animated.View style={{ transform: [{ scale: unlockScale }] }}>
+      <Animated.View style={{ transform: [{ scale: unlockScale }], marginBottom: 20 }}>
         <TouchableOpacity
           activeOpacity={isUnlocked ? 0.85 : 1}
           onPress={isUnlocked ? handlePlay : handleLockedPress}
         >
-          <GlassCard
-            style={styles.card}
-            locked={!isUnlocked}
-            gradientTint={category.gradient}
-          >
-            {/* Toast */}
-            {toast && (
-              <View style={styles.toastBar}>
-                <Text style={styles.toastText}>{toast}</Text>
+          <View style={styles.customCardWrapper}>
+            <LinearGradient colors={cardTheme.bg as [string, string]} style={styles.customCardGradient}>
+              
+              {/* Large BG Icon */}
+              <Icon name={category.icon} size={160} color="rgba(255,255,255,0.08)" style={styles.customCardBgIcon} />
+
+              <View style={styles.customCardTopContent}>
+                {/* Right side: Icon Circle */}
+                <View style={[styles.customCardIconCircle, { backgroundColor: cardTheme.accent }]}>
+                   <Icon name={category.icon} size={32} color="#FFF" style={{textShadowColor: 'rgba(0,0,0,0.2)', textShadowOffset: {width: 0, height: 1}, textShadowRadius: 2}} />
+                   {!isUnlocked && <LockOverlay />}
+                </View>
+
+                {/* Left of Icon: Text Content */}
+                <View style={styles.customCardTextContainer}>
+                  <Text style={styles.customCardTitle}>{category.title}</Text>
+                  <Text style={styles.customCardDesc}>{category.description}</Text>
+                  
+                  {isUnlocked && totalLevels > 0 ? (
+                    <>
+                      <Text style={styles.customCardProgressText}>{completedLevels.length}/{totalLevels} مكتملة</Text>
+                      <View style={styles.customCardProgressTrack}>
+                        <View style={[styles.customCardProgressFill, { width: `${progress}%`, backgroundColor: cardTheme.accent }]} />
+                      </View>
+                    </>
+                  ) : null}
+                </View>
               </View>
-            )}
 
-            {/* Card body — RTL row */}
-            <View style={styles.cardBody}>
-              {/* Icon bubble */}
-              <View style={styles.iconBubbleWrapper}>
-                <LinearGradient
-                  colors={category.gradient}
-                  style={styles.iconBubble}
-                >
-                  <Icon name={category.icon} size={28} color="#fff" />
-                </LinearGradient>
-                {!isUnlocked && <LockOverlay />}
-              </View>
-
-              {/* Text block */}
-              <View style={styles.textBlock}>
-                <Text style={styles.catTitle}>{category.title}</Text>
-                <Text style={styles.catDesc}>{category.description}</Text>
-
-                {/* Progress bar */}
-                {isUnlocked && totalLevels > 0 && (
-                  <View style={styles.progressRow}>
-                    <Text style={styles.progressLabel}>
-                      {completedLevels.length}/{totalLevels} مكتملة
-                    </Text>
-                    <View style={styles.progressTrack}>
-                      <LinearGradient
-                        colors={category.gradient}
-                        start={{ x: 0, y: 0 }}
-                        end={{ x: 1, y: 0 }}
-                        style={[
-                          styles.progressFill,
-                          { width: `${totalLevels > 0 ? (completedLevels.length / totalLevels) * 100 : 0}%` },
-                        ]}
-                      />
-                    </View>
-                  </View>
-                )}
-              </View>
-            </View>
-
-            {/* Action button */}
-            <View style={styles.btnRow}>
+              {/* Bottom: Action Button */}
               {isUnlocked ? (
-                <GlossyButton
-                  title="العب"
-                  icon="play"
-                  variant="play"
-                  onPress={handlePlay}
-                  style={styles.actionBtn}
-                />
+                <LinearGradient colors={['#22C55E', '#15803D']} style={styles.customCardPlayBtn}>
+                  <View style={{flexDirection: 'row-reverse', alignItems: 'center', gap: 6}}>
+                    <Text style={styles.customCardPlayText}>العب</Text>
+                    <Icon name="play" size={20} color="#FFF" />
+                  </View>
+                </LinearGradient>
               ) : (
-                <GlossyButton
-                  title={`افتح مقابل ${category.cost} عملة`}
-                  icon="lock-open"
-                  variant="unlock"
-                  onPress={handleLockedPress}
-                  style={styles.actionBtn}
-                />
+                <LinearGradient colors={['#475569', '#334155']} style={styles.customCardPlayBtn}>
+                  <View style={{flexDirection: 'row-reverse', alignItems: 'center', gap: 6}}>
+                    <Text style={styles.customCardPlayText}>افتح مقابل {category.cost} عملة</Text>
+                    <Icon name="lock-closed" size={18} color="#FFF" />
+                  </View>
+                </LinearGradient>
               )}
-            </View>
-          </GlassCard>
+            </LinearGradient>
+          </View>
         </TouchableOpacity>
       </Animated.View>
 
       {/* Confirmation modal */}
+{/* Confirmation modal */}
       <Modal visible={confirmVisible} transparent animationType="fade">
         <View style={styles.modalBackdrop}>
           <GlassCard style={styles.modalCard}>
@@ -254,6 +243,108 @@ export const CategoriesScreen: React.FC = () => (
 // ─── Styles ───────────────────────────────────────────────────────────────────
 
 const styles = StyleSheet.create({
+
+  customCardWrapper: {
+    borderRadius: 20,
+    borderWidth: 1.5,
+    borderColor: 'rgba(255,255,255,0.25)',
+    overflow: 'hidden',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.3,
+    shadowRadius: 15,
+    elevation: 8,
+  },
+  customCardGradient: {
+    padding: 16,
+    paddingBottom: 20,
+  },
+  customCardBgIcon: {
+    position: 'absolute',
+    left: -20,
+    top: 10,
+    opacity: 0.8,
+  },
+  customCardTopContent: {
+    flexDirection: 'row-reverse',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  customCardIconCircle: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 5,
+    marginLeft: 15,
+  },
+  customCardTextContainer: {
+    flex: 1,
+    alignItems: 'flex-start',
+  },
+  customCardTitle: {
+    fontFamily: glass.fonts.bold,
+    fontSize: 22,
+    color: '#FFF',
+    textAlign: 'right',
+    writingDirection: 'rtl',
+    textShadowColor: 'rgba(0,0,0,0.3)',
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 3,
+  },
+  customCardDesc: {
+    fontFamily: glass.fonts.regular,
+    fontSize: 14,
+    color: '#E2E8F0',
+    textAlign: 'right',
+    writingDirection: 'rtl',
+    marginTop: 2,
+    marginBottom: 10,
+  },
+  customCardProgressText: {
+    fontFamily: glass.fonts.regular,
+    fontSize: 12,
+    color: '#CBD5E1',
+    textAlign: 'right',
+    writingDirection: 'rtl',
+    marginBottom: 4,
+    alignSelf: 'flex-start'
+  },
+  customCardProgressTrack: {
+    width: '95%',
+    height: 6,
+    backgroundColor: 'rgba(255,255,255,0.15)',
+    borderRadius: 3,
+    overflow: 'hidden',
+  },
+  customCardProgressFill: {
+    height: '100%',
+    borderRadius: 3,
+  },
+  customCardPlayBtn: {
+    width: '95%',
+    alignSelf: 'center',
+    paddingVertical: 12,
+    borderRadius: 25,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#16A34A',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.5,
+    shadowRadius: 8,
+    elevation: 5,
+  },
+  customCardPlayText: {
+    fontFamily: glass.fonts.bold,
+    fontSize: 20,
+    color: '#FFF',
+  },
+
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
