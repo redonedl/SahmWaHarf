@@ -7,7 +7,6 @@ import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '../navigation/types';
 import { glass } from '../theme/glass';
-import { HeroLogo } from '../components/HeroLogo';
 
 const { width } = Dimensions.get('window');
 
@@ -32,45 +31,48 @@ export const LandingScreen: React.FC = () => {
         >
           
           <View style={styles.contentWrapper}>
-            {/* Main Image Logo in Middle Top */}
-            <Image 
-              source={require('../assets/images/logo.png')}
-              style={styles.mainLogo}
-              resizeMode="contain"
-            />
             
-            <Text style={styles.title}>ألعاب متنوعة للمبتدئين</Text>
-            <Text style={styles.subtitle}>اكتشف الكلمات • نمي معرفتك • استمتع بالتحدي</Text>
-
-            {/* 3D Center Image Logo */}
-            <View style={styles.podiumContainer}>
-               <HeroLogo />
-            </View>
-
-            {/* Play Button */}
-            <TouchableOpacity activeOpacity={0.8} onPress={handlePlay} style={styles.playButtonWrapper}>
-              <LinearGradient 
-                colors={['#10B981', '#059669']} 
-                start={{x: 0, y: 0}} end={{x: 0, y: 1}}
-                style={styles.playButton}
-              >
-                <View style={styles.playButtonInner}>
-                  <Text style={styles.playButtonText}>ابدأ اللعب</Text>
-                  <Icon name="play" size={24} color="#FFF" style={{ marginRight: 8 }} />
-                </View>
-              </LinearGradient>
-            </TouchableOpacity>
-
-            {/* Image Category Grid Replacement */}
-            <View style={styles.categoriesImageContainer}>
+            {/* TOP SECTION */}
+            <View style={styles.topSection}>
               <Image 
-                source={require('../assets/images/categories.png')}
-                style={styles.categoriesImage}
+                source={require('../assets/images/logo.png')}
+                style={styles.mainLogo}
                 resizeMode="contain"
               />
+              <Text style={styles.title}>ألعاب متنوعة للمبتدئين</Text>
+              <Text style={styles.subtitle}>اكتشف الكلمات • نمي معرفتك • استمتع بالتحدي</Text>
             </View>
-          </View>
 
+            {/* SPACER (Lets the background shine through!) */}
+            <View style={{ flex: 1 }} />
+
+            {/* BOTTOM SECTION */}
+            <View style={styles.bottomSection}>
+              {/* Play Button */}
+              <TouchableOpacity activeOpacity={0.8} onPress={handlePlay} style={styles.playButtonWrapper}>
+                <LinearGradient 
+                  colors={['#10B981', '#059669']} 
+                  start={{x: 0, y: 0}} end={{x: 0, y: 1}}
+                  style={styles.playButton}
+                >
+                  <View style={styles.playButtonInner}>
+                    <Text style={styles.playButtonText}>ابدأ اللعب</Text>
+                    <Icon name="play" size={24} color="#FFF" style={{ marginRight: 8 }} />
+                  </View>
+                </LinearGradient>
+              </TouchableOpacity>
+
+              {/* Image Category Grid Replacement */}
+              <View style={styles.categoriesImageContainer}>
+                <Image 
+                  source={require('../assets/images/categories.png')}
+                  style={styles.categoriesImage}
+                  resizeMode="contain"
+                />
+              </View>
+            </View>
+
+          </View>
         </ScrollView>
       </SafeAreaView>
     </ImageBackground>
@@ -84,48 +86,45 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     flexGrow: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 10,
   },
   contentWrapper: {
+    flex: 1,
     width: '100%',
+    justifyContent: 'space-between',
+    paddingVertical: 10,
+  },
+  topSection: {
     alignItems: 'center',
-    justifyContent: 'center',
+    marginTop: 20,
+  },
+  bottomSection: {
+    alignItems: 'center',
+    marginBottom: 15,
   },
   mainLogo: {
-    width: width * 0.65,
-    height: 90,
+    width: width * 0.75,
+    height: 110,
     marginBottom: 5,
   },
   title: {
     fontFamily: glass.fonts.bold,
-    fontSize: 20,
+    fontSize: 22,
     color: '#ffffff',
     textShadowColor: 'rgba(255, 255, 255, 0.5)',
     textShadowOffset: { width: 0, height: 0 },
     textShadowRadius: 10,
     textAlign: 'center',
-    marginBottom: 2,
+    marginBottom: 4,
   },
   subtitle: {
     fontFamily: glass.fonts.regular,
-    fontSize: 13,
+    fontSize: 14,
     color: '#E2E8F0',
     textAlign: 'center',
-    marginBottom: 20,
-  },
-  podiumContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 210,
-    height: 210,
-    marginTop: 10,
-    marginBottom: 35,
   },
   playButtonWrapper: {
     width: '85%',
-    marginBottom: 30,
+    marginBottom: 25,
     shadowColor: '#10B981',
     shadowOffset: { width: 0, height: 5 },
     shadowOpacity: 0.8,
@@ -156,7 +155,7 @@ const styles = StyleSheet.create({
   },
   categoriesImageContainer: {
     width: '95%',
-    height: 120,
+    height: 100,
     alignItems: 'center',
     justifyContent: 'center',
   },
