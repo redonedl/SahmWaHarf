@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Image, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Image, ScrollView, ImageBackground } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -19,58 +19,61 @@ export const LandingScreen: React.FC = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <LinearGradient colors={['#170535', '#0B1841', '#060B26']} style={StyleSheet.absoluteFillObject} />
-      
-      {/* Background Glowing Orbs */}
-      <View style={[styles.orb, { top: -50, right: -50, width: 250, height: 250, backgroundColor: '#3B0764' }]} />
-      <View style={[styles.orb, { top: 250, left: -100, width: 300, height: 300, backgroundColor: '#1E3A8A' }]} />
-      <View style={[styles.orb, { bottom: -100, right: -50, width: 200, height: 200, backgroundColor: '#312E81' }]} />
-
+    <ImageBackground 
+      source={require('../assets/images/landing_bg.jpg')} 
+      style={styles.container}
+      resizeMode="cover"
+    >
       <SafeAreaView style={{ flex: 1 }} edges={['top', 'bottom']}>
-        <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+        <ScrollView 
+          contentContainerStyle={styles.scrollContent} 
+          showsVerticalScrollIndicator={false}
+          bounces={false}
+        >
           
-          {/* Main Image Logo in Middle Top */}
-          <Image 
-            source={require('../assets/images/logo.png')}
-            style={styles.mainLogo}
-            resizeMode="contain"
-          />
-          
-          <Text style={styles.title}>ألعاب متنوعة للمبتدئين</Text>
-          <Text style={styles.subtitle}>اكتشف الكلمات • نمي معرفتك • استمتع بالتحدي</Text>
-
-          {/* 3D Center Image Logo */}
-          <View style={styles.podiumContainer}>
-             <HeroLogo />
-          </View>
-
-          {/* Play Button */}
-          <TouchableOpacity activeOpacity={0.8} onPress={handlePlay} style={styles.playButtonWrapper}>
-            <LinearGradient 
-              colors={['#10B981', '#059669']} 
-              start={{x: 0, y: 0}} end={{x: 0, y: 1}}
-              style={styles.playButton}
-            >
-              <View style={styles.playButtonInner}>
-                <Text style={styles.playButtonText}>ابدأ اللعب</Text>
-                <Icon name="play" size={24} color="#FFF" style={{ marginRight: 8 }} />
-              </View>
-            </LinearGradient>
-          </TouchableOpacity>
-
-          {/* Image Category Grid Replacement */}
-          <View style={styles.categoriesImageContainer}>
+          <View style={styles.contentWrapper}>
+            {/* Main Image Logo in Middle Top */}
             <Image 
-              source={require('../assets/images/categories.png')}
-              style={styles.categoriesImage}
+              source={require('../assets/images/logo.png')}
+              style={styles.mainLogo}
               resizeMode="contain"
             />
+            
+            <Text style={styles.title}>ألعاب متنوعة للمبتدئين</Text>
+            <Text style={styles.subtitle}>اكتشف الكلمات • نمي معرفتك • استمتع بالتحدي</Text>
+
+            {/* 3D Center Image Logo */}
+            <View style={styles.podiumContainer}>
+               <HeroLogo />
+            </View>
+
+            {/* Play Button */}
+            <TouchableOpacity activeOpacity={0.8} onPress={handlePlay} style={styles.playButtonWrapper}>
+              <LinearGradient 
+                colors={['#10B981', '#059669']} 
+                start={{x: 0, y: 0}} end={{x: 0, y: 1}}
+                style={styles.playButton}
+              >
+                <View style={styles.playButtonInner}>
+                  <Text style={styles.playButtonText}>ابدأ اللعب</Text>
+                  <Icon name="play" size={24} color="#FFF" style={{ marginRight: 8 }} />
+                </View>
+              </LinearGradient>
+            </TouchableOpacity>
+
+            {/* Image Category Grid Replacement */}
+            <View style={styles.categoriesImageContainer}>
+              <Image 
+                source={require('../assets/images/categories.png')}
+                style={styles.categoriesImage}
+                resizeMode="contain"
+              />
+            </View>
           </View>
 
         </ScrollView>
       </SafeAreaView>
-    </View>
+    </ImageBackground>
   );
 };
 
@@ -80,15 +83,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#060B26',
   },
   scrollContent: {
+    flexGrow: 1,
     alignItems: 'center',
-    paddingTop: 10,
-    paddingBottom: 20,
+    justifyContent: 'center',
+    paddingVertical: 10,
   },
-  orb: {
-    position: 'absolute',
-    borderRadius: 999,
-    opacity: 0.6,
-    transform: [{ scale: 1.5 }],
+  contentWrapper: {
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   mainLogo: {
     width: width * 0.65,
