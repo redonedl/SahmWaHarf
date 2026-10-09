@@ -127,33 +127,22 @@ const CategoryCard: React.FC<CategoryCardProps> = React.memo(({ category }) => {
                   <Text style={styles.customCardTitle}>{category.title}</Text>
                   <Text style={styles.customCardDesc}>{category.description}</Text>
                   
-                  {isUnlocked && totalLevels > 0 ? (
-                    <>
-                      <Text style={styles.customCardProgressText}>{completedLevels.length}/{totalLevels} مكتملة</Text>
-                      <View style={styles.customCardProgressTrack}>
-                        <View style={[styles.customCardProgressFill, { width: `${progress}%`, backgroundColor: cardTheme.accent }]} />
-                      </View>
-                    </>
-                  ) : null}
+                  {/* Always show progress */}
+                  <Text style={styles.customCardProgressText}>{completedLevels.length}/{totalLevels} مكتملة</Text>
+                  <View style={styles.customCardProgressTrack}>
+                    <View style={[styles.customCardProgressFill, { width: `${progress}%`, backgroundColor: cardTheme.accent }]} />
+                  </View>
                 </View>
               </View>
 
-              {/* Bottom: Action Button */}
-              {isUnlocked ? (
-                <LinearGradient colors={['#22C55E', '#15803D']} style={styles.customCardPlayBtn}>
-                  <View style={{flexDirection: 'row-reverse', alignItems: 'center', gap: 6}}>
-                    <Text style={styles.customCardPlayText}>العب</Text>
-                    <Icon name="play" size={20} color="#FFF" />
-                  </View>
-                </LinearGradient>
-              ) : (
-                <LinearGradient colors={['#475569', '#334155']} style={styles.customCardPlayBtn}>
-                  <View style={{flexDirection: 'row-reverse', alignItems: 'center', gap: 6}}>
-                    <Text style={styles.customCardPlayText}>افتح مقابل {category.cost} عملة</Text>
-                    <Icon name="lock-closed" size={18} color="#FFF" />
-                  </View>
-                </LinearGradient>
-              )}
+              {/* Bottom: Action Button (Always Green Play Button) */}
+              <LinearGradient colors={['#22C55E', '#15803D']} style={styles.customCardPlayBtn}>
+                <View style={{flexDirection: 'row-reverse', alignItems: 'center', gap: 6}}>
+                  <Text style={styles.customCardPlayText}>العب</Text>
+                  <Icon name="play" size={20} color="#FFF" />
+                </View>
+              </LinearGradient>
+
             </LinearGradient>
           </View>
         </TouchableOpacity>
