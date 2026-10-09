@@ -20,6 +20,8 @@ import { GlassCard } from '../components/ui/GlassCard';
 import { GlossyButton } from '../components/ui/GlossyButton';
 import { CoinBadge } from '../components/ui/CoinBadge';
 import { GameBoard } from '../components/GameBoard';
+import { HeaderLogo } from "../components/HeaderLogo";
+
 import { CustomArabicKeyboard } from '../components/CustomArabicKeyboard';
 import type { RootStackParamList } from '../navigation/types';
 import { glass } from '../theme/glass';
@@ -136,9 +138,12 @@ export const GameScreen: React.FC = () => {
         <TouchableOpacity style={styles.backBtn} onPress={() => navigation.goBack()}>
           <Icon name="arrow-forward" size={22} color={glass.textPrimary} />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>
-          {category?.title ?? categoryId} — المستوى {levelId}
-        </Text>
+        <View style={styles.headerCenter}>
+          <HeaderLogo width={120} height={45} style={{ marginBottom: 2 }} />
+          <Text style={styles.headerSubtitle}>
+            {category?.title ?? categoryId} — المستوى {levelId}
+          </Text>
+        </View>
         <CoinBadge />
       </View>
 
@@ -287,6 +292,17 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     writingDirection: 'rtl',
     marginHorizontal: glass.space.sm,
+  },
+  headerCenter: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  headerSubtitle: {
+    fontFamily: glass.fonts.bold,
+    fontSize: 12,
+    color: glass.textSecondary,
+    writingDirection: 'rtl',
   },
   boardWrapper: {
     flex: 1,

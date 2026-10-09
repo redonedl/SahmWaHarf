@@ -1,3 +1,5 @@
+import { HeaderLogo } from "../components/HeaderLogo";
+
 import React, { useCallback, useRef, useState } from 'react';
 import {
   View,
@@ -198,8 +200,8 @@ const CategoryCard: React.FC<CategoryCardProps> = React.memo(({ category }) => {
   );
 });
 
-// ─── CategoriesScreen ─────────────────────────────────────────────────────────
 
+// ─── CategoriesScreen ─────────────────────────────────────────────────────────
 
 const AudioControls = () => {
   const isMusicEnabled = useGameStore(s => s.isMusicEnabled);
@@ -228,10 +230,12 @@ export const CategoriesScreen: React.FC = () => (
     {/* Header */}
     <View style={styles.header}>
       <View style={{ flexDirection: 'column', gap: 10 }}>
-        <Text style={styles.headerTitle}>الكلمات المسهمة</Text>
+        <HeaderLogo width={140} height={60} />
+      </View>
+      <View style={{ flexDirection: 'column', alignItems: 'flex-end', gap: 8 }}>
+        <CoinBadge />
         <AudioControls />
       </View>
-      <CoinBadge />
     </View>
     <Text style={styles.subtitle}>اختر فئة لتبدأ</Text>
 
