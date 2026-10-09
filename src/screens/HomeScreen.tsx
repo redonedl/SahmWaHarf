@@ -33,36 +33,11 @@ type NavProp = NativeStackNavigationProp<RootStackParamList, 'Categories'>;
 
 const getCategoryStyles = (id: string) => {
   switch(id) {
-    case 'general': return { 
-      bg: ['rgba(76, 29, 149, 0.9)', 'rgba(46, 16, 101, 0.95)'], 
-      accent: '#C084FC', 
-      btn: ['#A855F7', '#7E22CE'],
-      ill: require('../assets/images/cat_ill_general.jpg')
-    };
-    case 'animals': return { 
-      bg: ['rgba(20, 83, 45, 0.9)', 'rgba(6, 78, 59, 0.95)'], 
-      accent: '#4ADE80', 
-      btn: ['#22C55E', '#15803D'],
-      ill: require('../assets/images/cat_ill_animals.jpg')
-    };
-    case 'kitchen': return { 
-      bg: ['rgba(154, 52, 18, 0.9)', 'rgba(124, 45, 18, 0.95)'], 
-      accent: '#FBBF24', 
-      btn: ['#F59E0B', '#B45309'],
-      ill: require('../assets/images/cat_ill_kitchen.jpg')
-    };
-    case 'islamic': return { 
-      bg: ['rgba(30, 58, 138, 0.9)', 'rgba(23, 37, 84, 0.95)'], 
-      accent: '#38BDF8', 
-      btn: ['#0EA5E9', '#0369A1'],
-      ill: require('../assets/images/cat_ill_islamic.jpg')
-    };
-    default: return { 
-      bg: ['rgba(255,255,255,0.1)', 'rgba(255,255,255,0.05)'], 
-      accent: '#94A3B8', 
-      btn: ['#64748B', '#475569'],
-      ill: null
-    };
+    case 'general': return { bg: ['rgba(88, 68, 157, 0.95)', 'rgba(46, 32, 97, 0.95)'], accent: '#818CF8' };
+    case 'animals': return { bg: ['rgba(54, 117, 78, 0.95)', 'rgba(23, 73, 44, 0.95)'], accent: '#84CC16' };
+    case 'kitchen': return { bg: ['rgba(174, 98, 58, 0.95)', 'rgba(122, 60, 28, 0.95)'], accent: '#F59E0B' };
+    case 'islamic': return { bg: ['rgba(32, 136, 152, 0.95)', 'rgba(18, 88, 103, 0.95)'], accent: '#06B6D4' };
+    default: return { bg: ['rgba(255,255,255,0.1)', 'rgba(255,255,255,0.05)'], accent: '#94A3B8' };
   }
 };
 
@@ -135,28 +110,14 @@ const CategoryCard: React.FC<CategoryCardProps> = React.memo(({ category }) => {
           onPress={isUnlocked ? handlePlay : handleLockedPress}
         >
           <View style={styles.customCardWrapper}>
-            {/* Base Background Image (3D Illustration) */}
-            {cardTheme.ill && (
-              <Animated.Image 
-                source={cardTheme.ill} 
-                style={styles.customCardIllustration} 
-                resizeMode="cover"
-              />
-            )}
-            
-            {/* Gradient Overlay covering right side and fading to left */}
-            <LinearGradient 
-              colors={['transparent', cardTheme.bg[0], cardTheme.bg[1]]}
-              start={{x: 0, y: 0.5}} end={{x: 0.4, y: 0.5}}
-              style={styles.customCardGradientOverlay}
-            />
-
-            {/* Content Container */}
-            <View style={styles.customCardContentArea}>
+            <LinearGradient colors={cardTheme.bg as [string, string]} style={styles.customCardGradient}>
               
+              {/* Large BG Icon */}
+              <Icon name={category.icon} size={160} color="rgba(255,255,255,0.08)" style={styles.customCardBgIcon} />
+
               <View style={styles.customCardTopContent}>
                 {/* Right side: Icon Circle */}
-                <View style={[styles.customCardIconCircle, { backgroundColor: cardTheme.btn[0] }]}>
+                <View style={[styles.customCardIconCircle, { backgroundColor: cardTheme.accent }]}>
                    <Icon name={category.icon} size={32} color="#FFF" style={{textShadowColor: 'rgba(0,0,0,0.2)', textShadowOffset: {width: 0, height: 1}, textShadowRadius: 2}} />
                    {!isUnlocked && <LockOverlay />}
                 </View>
@@ -174,15 +135,15 @@ const CategoryCard: React.FC<CategoryCardProps> = React.memo(({ category }) => {
                 </View>
               </View>
 
-              {/* Bottom: Action Button (Colored per category theme) */}
-              <LinearGradient colors={cardTheme.btn as [string, string]} style={styles.customCardPlayBtn}>
+              {/* Bottom: Action Button (Always Green Play Button) */}
+              <LinearGradient colors={['#22C55E', '#15803D']} style={styles.customCardPlayBtn}>
                 <View style={{flexDirection: 'row-reverse', alignItems: 'center', gap: 6}}>
                   <Text style={styles.customCardPlayText}>العب</Text>
                   <Icon name="play" size={20} color="#FFF" />
                 </View>
               </LinearGradient>
 
-            </View>
+            </LinearGradient>
           </View>
         </TouchableOpacity>
       </Animated.View>
@@ -275,33 +236,23 @@ const styles = StyleSheet.create({
   customCardWrapper: {
     borderRadius: 20,
     borderWidth: 1.5,
-    borderColor: 'rgba(255,255,255,0.4)',
+    borderColor: 'rgba(255,255,255,0.25)',
     overflow: 'hidden',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 10 },
     shadowOpacity: 0.3,
     shadowRadius: 15,
     elevation: 8,
-    backgroundColor: '#000', // fallback
-    minHeight: 165,
   },
-  customCardIllustration: {
-    position: 'absolute',
-    left: 0,
-    top: 0,
-    bottom: 0,
-    width: '45%', // Takes up the left side
-  },
-  customCardGradientOverlay: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-  },
-  customCardContentArea: {
+  customCardGradient: {
     padding: 16,
     paddingBottom: 20,
+  },
+  customCardBgIcon: {
+    position: 'absolute',
+    left: -20,
+    top: 10,
+    opacity: 0.8,
   },
   customCardTopContent: {
     flexDirection: 'row-reverse',
@@ -355,19 +306,14 @@ const styles = StyleSheet.create({
   },
   customCardProgressTrack: {
     width: '95%',
-    height: 8,
-    backgroundColor: 'rgba(255,255,255,0.2)',
-    borderRadius: 4,
+    height: 6,
+    backgroundColor: 'rgba(255,255,255,0.15)',
+    borderRadius: 3,
     overflow: 'hidden',
   },
   customCardProgressFill: {
     height: '100%',
-    borderRadius: 4,
-    shadowColor: '#FFF',
-    shadowOpacity: 0.8,
-    shadowRadius: 5,
-    shadowOffset: {width: 0, height: 0},
-    elevation: 3,
+    borderRadius: 3,
   },
   customCardPlayBtn: {
     width: '95%',
@@ -376,9 +322,9 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#000',
+    shadowColor: '#16A34A',
     shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.4,
+    shadowOpacity: 0.5,
     shadowRadius: 8,
     elevation: 5,
   },
