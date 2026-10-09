@@ -250,12 +250,12 @@ const styles = StyleSheet.create({
   },
   customCardBgIcon: {
     position: 'absolute',
-    left: -20,
+    right: -20, // since left put it on the right in RTL, right will put it on the left
     top: 10,
     opacity: 0.8,
   },
   customCardTopContent: {
-    flexDirection: 'row-reverse',
+    flexDirection: 'row', // in RTL, row means elements start from right
     alignItems: 'center',
     marginBottom: 20,
   },
