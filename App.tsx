@@ -13,6 +13,7 @@ import { GameScreen } from './src/screens/GameScreen';
 import type { RootStackParamList } from './src/navigation/types';
 import { glass } from './src/theme/glass';
 
+console.log("Splash import:", require("./src/screens/SplashScreen"));
 import { SplashScreen } from './src/screens/SplashScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
