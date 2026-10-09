@@ -58,14 +58,19 @@ export const LandingScreen: React.FC = () => {
               <Text style={styles.subtitle}>اكتشف الكلمات • نمي معرفتك • استمتع بالتحدي</Text>
             </View>
 
-            {/* MIDDLE: Glowing neon text above the pedestal */}
+            {/* MIDDLE: 3D Center Logo */}
             <View style={styles.middleSection}>
-              <Animated.Text style={[styles.neonLine1, { opacity: glowOpacity, textShadowRadius: glowRadius }]}>
-                تحدّى نفسك
-              </Animated.Text>
-              <Animated.Text style={[styles.neonLine2, { opacity: glowOpacity }]}>
-                ✦ كلمات • معرفة • مرح ✦
-              </Animated.Text>
+              <Animated.Image 
+                source={require('../assets/images/center_logo.jpg')}
+                style={[
+                  styles.centerLogoImage, 
+                  { 
+                    opacity: glowOpacity,
+                    transform: [{ scale: glowAnim.interpolate({ inputRange: [0, 1], outputRange: [1, 1.05] }) }]
+                  }
+                ]}
+                resizeMode="contain"
+              />
             </View>
 
             {/* BOTTOM SECTION */}
@@ -128,26 +133,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingVertical: 20,
   },
-  neonLine1: {
-    fontFamily: glass.fonts.bold,
-    fontSize: 42,
-    color: '#E0C4FF',
-    textAlign: 'center',
-    textShadowColor: '#C084FC',
-    textShadowOffset: { width: 0, height: 0 },
-    textShadowRadius: 15,
-    letterSpacing: 2,
-    marginBottom: 8,
-  },
-  neonLine2: {
-    fontFamily: glass.fonts.regular,
-    fontSize: 16,
-    color: '#A5F3FC',
-    textAlign: 'center',
-    textShadowColor: '#06B6D4',
-    textShadowOffset: { width: 0, height: 0 },
-    textShadowRadius: 12,
-    letterSpacing: 1,
+  centerLogoImage: {
+    width: width * 0.45,
+    height: width * 0.45,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.1)',
   },
   mainLogo: {
     width: width * 0.75,
