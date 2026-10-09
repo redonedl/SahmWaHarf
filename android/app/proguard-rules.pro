@@ -8,3 +8,9 @@
 #   http://developer.android.com/guide/developing/tools/proguard.html
 
 # Add any project specific keep options here:
+
+# Fix for "Failed to create an instance of androidx.work.impl.WorkDatabase" in release builds
+-keep class * extends androidx.work.ListenableWorker { *; }
+-keep class * extends androidx.room.RoomDatabase { *; }
+-keep class androidx.work.impl.WorkDatabase { *; }
+-keep class androidx.work.** { *; }
