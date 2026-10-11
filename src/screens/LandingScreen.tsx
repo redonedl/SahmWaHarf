@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Image, ScrollView, ImageBackground, Animated } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Image, ScrollView, ImageBackground, Animated, Easing } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -13,20 +13,37 @@ const { width } = Dimensions.get('window');
 export const LandingScreen: React.FC = () => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
-
-  const glowAnim = useRef(new Animated.Value(0)).current;
+  // Floating levitation & breathing animation for the center 3D logo
+  const floatAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     Animated.loop(
       Animated.sequence([
-        Animated.timing(glowAnim, { toValue: 1, duration: 1800, useNativeDriver: false }),
-        Animated.timing(glowAnim, { toValue: 0, duration: 1800, useNativeDriver: false }),
+        Animated.timing(floatAnim, {
+          toValue: 1,
+          duration: 1800,
+          easing: Easing.inOut(Easing.sin),
+          useNativeDriver: true,
+        }),
+        Animated.timing(floatAnim, {
+          toValue: 0,
+          duration: 1800,
+          easing: Easing.inOut(Easing.sin),
+          useNativeDriver: true,
+        }),
       ])
     ).start();
-  }, [glowAnim]);
+  }, [floatAnim]);
 
-  const glowRadius = glowAnim.interpolate({ inputRange: [0, 1], outputRange: [6, 22] });
-  const glowOpacity = glowAnim.interpolate({ inputRange: [0, 1], outputRange: [0.7, 1] });
+  const translateY = floatAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: [6, -10],
+  });
+
+  const scale = floatAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0.98, 1.04],
+  });
 
   const handlePlay = () => {
     navigation.navigate('Categories');
@@ -58,11 +75,19 @@ export const LandingScreen: React.FC = () => {
               <Text style={styles.subtitle}>اكتشف الكلمات • نمي معرفتك • استمتع بالتحدي</Text>
             </View>
 
-            {/* MIDDLE: 3D Center Logo (Transparent) */}
+            {/* MIDDLE: 3D Center Logo (Animated Floating) */}
             <View style={styles.middleSection}>
-              <Image 
+              <Animated.Image 
                 source={require('../assets/images/center_logo_transparent.png')}
-                style={styles.centerLogoImage}
+                style={[
+                  styles.centerLogoImage,
+                  {
+                    transform: [
+                      { translateY },
+                      { scale },
+                    ],
+                  },
+                ]}
                 resizeMode="contain"
               />
             </View>
