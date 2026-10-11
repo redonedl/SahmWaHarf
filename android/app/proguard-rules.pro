@@ -14,3 +14,9 @@
 -keep class * extends androidx.room.RoomDatabase { *; }
 -keep class androidx.work.impl.WorkDatabase { *; }
 -keep class androidx.work.** { *; }
+
+# Keep react-native-sound and raw resource IDs
+-keep class com.zmxv.RNSound.** { *; }
+-keepclassmembers class **.R$* {
+    public static <fields>;
+}
