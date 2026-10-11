@@ -95,9 +95,14 @@ export const GameScreen: React.FC = () => {
   }, [categoryId, levelId, mappedLevelId, loadLevel]);
 
   const handleBuyHint = () => {
+    const coins = useGameStore.getState().totalCoins;
+    if (coins < 20) {
+      Alert.alert('رصيد غير كافٍ', 'تحتاج إلى 20 عملة للحصول على تلميح.');
+      return;
+    }
     const success = buyHint();
     if (!success) {
-      Alert.alert('رصيد غير كافٍ', 'ليس لديك ما يكفي من العملات.');
+      Alert.alert('تنبيه', 'تم كشف جميع المربعات بالفعل!');
     }
   };
 

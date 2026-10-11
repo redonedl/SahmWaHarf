@@ -585,16 +585,76 @@ export const useGameStore = create<GameState>()(
 
       buyHint: () => {
         const state = get();
-        if (state.totalCoins >= 20) {
-          set({ totalCoins: state.totalCoins - 20 });
-          state.revealLetter();
-          if (state.activeCategoryId && state.activeLevelId) {
-            AnalyticsManager.logHintUsed(state.activeCategoryId, state.activeLevelId);
+        if (state.isLevelCompleted || !state.activeLevel) return false;
+        if (state.totalCoins < 20) return false;
+
+        // 1. Check if currently selected cell is an unsolved input cell
+        let targetCell: { row: number; col: number } | null = null;
+        if (state.selectedCell) {
+          const { row, col } = state.selectedCell;
+          const cell = state.activeLevel.cells[row]?.[col];
+          if (cell?.type === 'input' && cell.currentValue !== cell.expectedAnswer) {
+            targetCell = { row, col };
           }
-          require('../utils/AudioManager').playSfx('buy.mp3');
-          return true;
         }
-        return false;
+
+        // 2. If no valid selected cell, auto-find the first unsolved input cell
+        if (!targetCell) {
+          for (let r = 0; r < state.activeLevel.cells.length; r++) {
+            for (let c = 0; c < state.activeLevel.cells[r].length; c++) {
+              const cell = state.activeLevel.cells[r][c];
+              if (cell.type === 'input' && cell.currentValue !== cell.expectedAnswer) {
+                targetCell = { row: r, col: c };
+                break;
+              }
+            }
+            if (targetCell) break;
+          }
+        }
+
+        // 3. If there are no unsolved cells left, do nothing and DO NOT charge coins
+        if (!targetCell) return false;
+
+        // 4. Reveal the target cell and deduct coins
+        const { row, col } = targetCell;
+        const cell = state.activeLevel.cells[row][col] as InputCell;
+        const correctLetter = cell.expectedAnswer;
+        const levelId = state.activeLevel.id;
+        const levelKey = `${state.activeCategoryId}_${levelId}`;
+
+        const newCells = state.activeLevel.cells.map((r, rIdx) =>
+          rIdx === row
+            ? r.map((c, cIdx) =>
+                cIdx === col && c.type === 'input' ? { ...c, currentValue: correctLetter } : c,
+              )
+            : r,
+        );
+        const levelProgress = {
+          ...(state.currentLevelProgress[levelKey] ?? {}),
+          [`${row}-${col}`]: correctLetter,
+        };
+
+        const wordCells = computeActiveWordCells(
+          newCells,
+          state.activeLevel.words,
+          targetCell,
+          state.inputDirection,
+        );
+
+        set({
+          totalCoins: state.totalCoins - 20,
+          activeLevel: { ...state.activeLevel, cells: newCells },
+          currentLevelProgress: { ...state.currentLevelProgress, [levelKey]: levelProgress },
+          selectedCell: targetCell,
+          activeWordCells: wordCells,
+        });
+
+        if (state.activeCategoryId && state.activeLevelId) {
+          AnalyticsManager.logHintUsed(state.activeCategoryId, state.activeLevelId);
+        }
+        require('../utils/AudioManager').playSfx('buy.mp3');
+        get().checkCorrectWords();
+        return true;
       },
 
       earnCoins: () => set((s) => ({ totalCoins: s.totalCoins + 50 })),

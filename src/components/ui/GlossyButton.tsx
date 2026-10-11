@@ -15,7 +15,8 @@ interface Props {
   title: string;
   onPress: () => void;
   icon?: string;
-  variant?: 'play' | 'unlock' | 'disabled';
+  variant?: 'play' | 'unlock' | 'disabled' | 'secondary';
+  disabled?: boolean;
   loading?: boolean;
   style?: ViewStyle;
 }
@@ -24,6 +25,7 @@ const GRADIENTS: Record<string, string[]> = {
   play: glass.btnPlay,
   unlock: glass.btnUnlock,
   disabled: glass.btnDisabled,
+  secondary: ['rgba(71, 85, 105, 0.85)', 'rgba(30, 41, 59, 0.95)'],
 };
 
 export const GlossyButton: React.FC<Props> = ({
@@ -31,26 +33,34 @@ export const GlossyButton: React.FC<Props> = ({
   onPress,
   icon,
   variant = 'play',
+  disabled = false,
   loading = false,
   style,
 }) => {
+  const isDisabled = disabled || variant === 'disabled' || loading;
   const scale = useRef(new Animated.Value(1)).current;
 
-  const onPressIn = () =>
-    Animated.spring(scale, { toValue: 0.95, useNativeDriver: true }).start();
-  const onPressOut = () =>
-    Animated.spring(scale, { toValue: 1, useNativeDriver: true }).start();
+  const onPressIn = () => {
+    if (!isDisabled) {
+      Animated.spring(scale, { toValue: 0.95, useNativeDriver: true }).start();
+    }
+  };
+  const onPressOut = () => {
+    if (!isDisabled) {
+      Animated.spring(scale, { toValue: 1, useNativeDriver: true }).start();
+    }
+  };
 
   const colors = GRADIENTS[variant] ?? GRADIENTS.play;
 
   return (
     <Animated.View style={[{ transform: [{ scale }] }, style]}>
       <TouchableOpacity
-        activeOpacity={0.9}
+        activeOpacity={0.8}
         onPress={onPress}
         onPressIn={onPressIn}
         onPressOut={onPressOut}
-        disabled={variant === 'disabled' || loading}
+        disabled={isDisabled}
       >
         <LinearGradient colors={colors} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={styles.gradient}>
           {/* Top gloss sheen */}

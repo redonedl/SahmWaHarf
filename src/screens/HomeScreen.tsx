@@ -98,9 +98,9 @@ const CategoryCard: React.FC<CategoryCardProps> = React.memo(({ category }) => {
     setConfirmVisible(true);
   }, []);
 
-  
   const cardTheme = getCategoryStyles(category.id);
   const progress = totalLevels > 0 ? (completedLevels.length / totalLevels) * 100 : 0;
+  const canAfford = totalCoins >= category.cost;
 
   return (
     <>
@@ -149,24 +149,34 @@ const CategoryCard: React.FC<CategoryCardProps> = React.memo(({ category }) => {
       </Animated.View>
 
       {/* Confirmation modal */}
-{/* Confirmation modal */}
-      <Modal visible={confirmVisible} transparent animationType="fade">
+      <Modal visible={confirmVisible} transparent animationType="fade" onRequestClose={() => setConfirmVisible(false)}>
         <View style={styles.modalBackdrop}>
           <GlassCard style={styles.modalCard}>
             <Text style={styles.modalTitle}>
               {`هل تريد فتح فئة "${category.title}" مقابل ${category.cost} عملة؟`}
             </Text>
             <Text style={styles.modalBalance}>رصيدك: {totalCoins} عملة</Text>
+            
+            {!canAfford && (
+              <View style={styles.modalInsufficientBox}>
+                <Icon name="alert-circle-outline" size={18} color="#EF4444" style={{ marginLeft: 6 }} />
+                <Text style={styles.modalInsufficientText}>
+                  {`الرصيد غير كافٍ — تحتاج إلى ${category.cost - totalCoins} عملة إضافية`}
+                </Text>
+              </View>
+            )}
+
             <View style={styles.modalBtns}>
               <GlossyButton
-                title="تأكيد"
-                variant="unlock"
+                title={canAfford ? "تأكيد" : "رصيد غير كافٍ"}
+                variant={canAfford ? "unlock" : "disabled"}
+                disabled={!canAfford}
                 onPress={handleConfirmUnlock}
                 style={styles.modalBtn}
               />
               <GlossyButton
                 title="إلغاء"
-                variant="disabled"
+                variant="secondary"
                 onPress={() => setConfirmVisible(false)}
                 style={styles.modalBtn}
               />
@@ -489,5 +499,24 @@ const styles = StyleSheet.create({
   },
   modalBtn: {
     width: '100%',
+  },
+  modalInsufficientBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(239, 68, 68, 0.15)',
+    borderWidth: 1,
+    borderColor: 'rgba(239, 68, 68, 0.3)',
+    borderRadius: 12,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    marginBottom: glass.space.md,
+  },
+  modalInsufficientText: {
+    fontFamily: glass.fonts.medium ?? glass.fonts.regular,
+    fontSize: 13,
+    color: '#FCA5A5',
+    textAlign: 'center',
+    writingDirection: 'rtl',
   },
 });

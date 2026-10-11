@@ -12,6 +12,8 @@ import { LevelSelectionScreen } from './src/screens/LevelSelectionScreen';
 import { GameScreen } from './src/screens/GameScreen';
 import type { RootStackParamList } from './src/navigation/types';
 import { glass } from './src/theme/glass';
+import { checkForAppUpdate } from './src/services/UpdateService';
+import { UpdateModal } from './src/components/UpdateModal';
 
 console.log("Splash import:", require("./src/screens/SplashScreen"));
 import { SplashScreen } from './src/screens/SplashScreen';
@@ -22,8 +24,16 @@ function App(): React.JSX.Element {
   const [hydrated, setHydrated] = useState(false);
   const [minSplashTime, setMinSplashTime] = useState(false);
   const [showSplash, setShowSplash] = useState(true);
+  const [updateInfo, setUpdateInfo] = useState({ hasUpdate: false, latestVersion: '' });
 
   useEffect(() => {
+    // Check Firestore for updates
+    checkForAppUpdate().then((info) => {
+      if (info.hasUpdate) {
+        setUpdateInfo(info);
+      }
+    });
+
     const timer = setTimeout(() => {
       setMinSplashTime(true);
     }, 2500);
@@ -78,6 +88,10 @@ function App(): React.JSX.Element {
           onFinish={() => setShowSplash(false)} 
         />
       )}
+      <UpdateModal 
+        visible={updateInfo.hasUpdate} 
+        version={updateInfo.latestVersion} 
+      />
     </SafeAreaProvider>
   );
 }
