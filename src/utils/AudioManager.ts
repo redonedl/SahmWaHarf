@@ -69,10 +69,10 @@ useGameStore.subscribe((state, prevState) => {
 
 let appState = AppState.currentState;
 AppState.addEventListener('change', nextAppState => {
-  if (appState.match(/inactive|background/) && nextAppState === 'active') {
+  if (appState?.match(/inactive|background/) && nextAppState === 'active') {
     // App came to foreground
     playBgm();
-  } else if (appState === 'active' && nextAppState.match(/inactive|background/)) {
+  } else if (appState === 'active' && nextAppState?.match(/inactive|background/)) {
     // App went to background
     stopBgm();
   }
