@@ -1,4 +1,4 @@
-import firestore from '@react-native-firebase/firestore';
+import { getFirestore } from '@react-native-firebase/firestore';
 import { Linking, Platform } from 'react-native';
 
 export const CURRENT_APP_VERSION = '1.0.6';
@@ -32,19 +32,27 @@ export interface UpdateInfo {
  */
 export const checkForAppUpdate = async (): Promise<UpdateInfo> => {
   try {
-    const doc = await firestore().collection('settings').doc('updates').get();
+    console.log('[UpdateService] Checking Firestore for updates...');
+    const db = getFirestore();
+    const doc = await db.collection('settings').doc('updates').get();
+    
     if (!doc.exists) {
+      console.log('[UpdateService] Document settings/updates does not exist');
       return { hasUpdate: false, latestVersion: CURRENT_APP_VERSION };
     }
 
     const data = doc.data();
     const remoteVersion = (data?.version ?? '').toString().trim();
+    console.log(`[UpdateService] Remote version found: "${remoteVersion}", Current: "${CURRENT_APP_VERSION}"`);
 
     if (remoteVersion && isNewerVersion(remoteVersion, CURRENT_APP_VERSION)) {
+      console.log(`[UpdateService] Update available! ${remoteVersion} > ${CURRENT_APP_VERSION}`);
       return {
         hasUpdate: true,
         latestVersion: remoteVersion,
       };
+    } else {
+      console.log('[UpdateService] App is up to date.');
     }
   } catch (err) {
     console.warn('[UpdateService] Failed to check for updates from Firestore:', err);

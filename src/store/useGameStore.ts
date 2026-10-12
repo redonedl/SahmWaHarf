@@ -138,6 +138,7 @@ interface GameState {
   showSuccessModal: boolean;
   activeWordCells: Coordinate[];
   wasAlreadyCompleted: boolean; // true if the level was solved before this session
+  solvedWordIds: string[]; // IDs of words currently solved in this active level
 
   // ── Category / progress actions ──
   syncCategories: () => void;
@@ -191,6 +192,7 @@ export const useGameStore = create<GameState>()(
       showSuccessModal: false,
       activeWordCells: [],
       wasAlreadyCompleted: false,
+      solvedWordIds: [],
 
       // ── Category / progress actions ────────────────────────────────────────
 
@@ -405,9 +407,10 @@ export const useGameStore = create<GameState>()(
             showSuccessModal: false,
             activeWordCells: [],
             wasAlreadyCompleted: alreadyCompleted,
+            solvedWordIds: [],
           };
         });
-        get().checkCorrectWords();
+        get().checkCorrectWords(true);
       },
 
       setSelectedCell: (row, col, forceDirection, autoSkipFilled) => {
@@ -659,17 +662,11 @@ export const useGameStore = create<GameState>()(
 
       earnCoins: () => set((s) => ({ totalCoins: s.totalCoins + 50 })),
 
-      checkCorrectWords: () => {
+      checkCorrectWords: (isInitialLoad: boolean = false) => {
         const state = get();
         if (!state.activeLevel) return false;
 
         const { cells, words, grid_height, grid_width } = state.activeLevel;
-        const prevCorrectWordsCount = Object.entries(words).filter(([, w]) => w.answer.split('').every((char, idx) => {
-          const r = w.start_cell.row + (w.direction === 'vertical' ? idx : 0);
-          const c = w.start_cell.col - (w.direction === 'horizontal' ? idx : 0);
-          const cell = state.activeLevel!.cells[r][c];
-          return cell.type === 'input' && (cell as InputCell).currentValue === char;
-        })).length;
         const newCells = cells.map((row) => row.map((cell) => ({ ...cell })));
 
         // Reset isCorrect
@@ -679,8 +676,11 @@ export const useGameStore = create<GameState>()(
           }),
         );
 
+        const currentSolvedWordIds = new Set(state.solvedWordIds || []);
+        let newlySolvedAWord = false;
+
         // Mark correct words
-        Object.entries(words).forEach(([, word]) => {
+        Object.entries(words).forEach(([wordId, word]) => {
           const len = word.answer.length;
           const coords: { r: number; c: number }[] = [];
           let allCorrect = true;
@@ -690,7 +690,7 @@ export const useGameStore = create<GameState>()(
             const c = word.direction === 'horizontal' ? word.start_cell.col - i : word.start_cell.col;
             coords.push({ r, c });
             const cell = newCells[r]?.[c];
-            if (!cell || cell.type !== 'input' || cell.currentValue?.toUpperCase() !== cell.expectedAnswer.toUpperCase()) {
+            if (!cell || cell.type !== 'input' || cell.currentValue?.toUpperCase() !== cell.expectedAnswer?.toUpperCase()) {
               allCorrect = false;
             }
           }
@@ -700,6 +700,11 @@ export const useGameStore = create<GameState>()(
               const cell = newCells[r]?.[c];
               if (cell?.type === 'input') (cell as InputCell).isCorrect = true;
             });
+
+            if (!currentSolvedWordIds.has(wordId)) {
+              currentSolvedWordIds.add(wordId);
+              newlySolvedAWord = true;
+            }
           }
         });
 
@@ -718,17 +723,17 @@ export const useGameStore = create<GameState>()(
         set((s) => ({
           activeLevel: { ...s.activeLevel!, cells: newCells as Cell[][] },
           isLevelCompleted: puzzleComplete,
+          solvedWordIds: Array.from(currentSolvedWordIds),
         }));
 
-        // On first completion in this session, record it
-        const newCorrectWordsCount = Object.entries(words).filter(([, w]) => w.answer.split('').every((char, idx) => {
-          const r = w.start_cell.row + (w.direction === 'vertical' ? idx : 0);
-          const c = w.start_cell.col - (w.direction === 'horizontal' ? idx : 0);
-          const cell = newCells[r][c];
-          return cell.type === 'input' && (cell as InputCell).currentValue === char;
-        })).length;
-        if (newCorrectWordsCount > prevCorrectWordsCount && !puzzleComplete) {
+        // Play question/word success SFX whenever a new word is solved during play (not initial load)
+        if (newlySolvedAWord && !isInitialLoad && !puzzleComplete) {
+          console.log('[GameStore] Word solved correctly! Playing word_success.mp3');
           require('../utils/AudioManager').playSfx('word_success.mp3');
+          try {
+            const ReactNativeHapticFeedback = require('react-native-haptic-feedback').default;
+            ReactNativeHapticFeedback.trigger('impactMedium');
+          } catch (_) {}
         }
 
         if (puzzleComplete && !state.isLevelCompleted) {
